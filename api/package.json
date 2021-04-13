@@ -2,14 +2,15 @@
   "name": "cryptoindex",
   "version": "1.0.0",
   "description": "cryptoindex API",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start":"nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "Daniela Justin",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
+    "config": "^3.3.6",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",

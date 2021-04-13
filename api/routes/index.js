@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
-const db = require("../config/key").mongoURI;
+const config = require('config');
+const jwt = require('jsonwebtoken')
+
+const db = config.get('mongoURI');
 
 const client = new MongoClient(db, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -22,7 +25,21 @@ client.connect(err => {
 router.post('/', function(req, res, next) {  
       collection.insertOne({ ...req.body }, ((err, result) => {
         if(err) throw err;
-        res.json({msg:'User Created'});
+        jwt.sign({
+          name: req.body.name
+        },
+         config.get('jwtSecret'),
+          { expiresIn: 60 * 60 },
+          (err,token) => {
+            if(err) throw err;
+            res.json({
+              token,
+              msg:'User Created'
+            });
+          });
+         
+       
+        client.close();
       }));   
   });
 
@@ -54,7 +71,7 @@ router.delete('/:name', function(req, res, next) {
     
   });
   
-  client.close();
+ 
 })
 
 module.exports = router;
