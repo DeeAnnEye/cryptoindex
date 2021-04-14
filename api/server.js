@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var usersRouter = require('./routes/users');
 var indexRouter = require('./routes/index');
+var authRouter = require('./routes/auth')
 
 var app = express();
 
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT,() => {console.log(`Server started running on port ${PORT}`)})

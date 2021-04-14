@@ -82,21 +82,6 @@ router.delete('/:name', function(req, res, next) {
   
       }));    
   });
-
-// POST:Authenticate a user
-router.post('/auth/', function(req, res, next) {  
-
-  const email = req.body.email;
-  res.json({email});
-  
-    var query = { email };
-    var projection = { 'name':1, 'email':1 };
-
-    collection.findOne(query,projection, (result => {
-      res.json({result});
-      
-    })); 
-});
   
  
 })
