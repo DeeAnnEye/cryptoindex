@@ -27,9 +27,9 @@ router.post('/', function(req, res, next) {
 
    let email = req.body.email;
    let password = req.body.password;
-   let userName = req.body.name;
+   let name = req.body.name;
 
-   if(!email || !password || !userName){
+   if(!email || !password || !name){
        res.status(400).send("Enter all fields.");
    }
 
@@ -38,10 +38,10 @@ router.post('/', function(req, res, next) {
     password = hash;
 
         
-      collection.insertOne({ email,password,userName }, ((err, result) => {
+      collection.insertOne({ email,password,name }, ((err, result) => {
         if(err) throw err;
         jwt.sign({
-          name: userName
+          name: name
         },
          config.get('jwtSecret'),
           { expiresIn: 60 * 60 },
@@ -80,9 +80,23 @@ router.delete('/:name', function(req, res, next) {
         res.json({msg:'User Deleted'});
         client.close();
   
-      }));
-    
+      }));    
   });
+
+// POST:Authenticate a user
+router.post('/auth/', function(req, res, next) {  
+
+  const email = req.body.email;
+  res.json({email});
+  
+    var query = { email };
+    var projection = { 'name':1, 'email':1 };
+
+    collection.findOne(query,projection, (result => {
+      res.json({result});
+      
+    })); 
+});
   
  
 })
