@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
       res.status(400).json({msg:"Email already exists."});
     }
   })
-  
+
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
     password = hash;
@@ -75,7 +75,7 @@ router.put('/:name', function(req, res, next) {
       collection.updateOne(query,newvalues, ((err, result) => {
         if(err) throw err;
         res.json({msg:'User Updated'});
-        client.close();  
+       
       })); 
   });
 
@@ -87,8 +87,7 @@ router.delete('/:name', function(req, res, next) {
       collection.deleteOne(query,((err, result) => {
         if(err) throw err;
         res.json({msg:'User Deleted'});
-        client.close();
-  
+         
       }));    
   });
   

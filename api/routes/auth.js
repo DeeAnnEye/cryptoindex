@@ -55,6 +55,31 @@ router.post('/', function(req, res, next) {
       }); 
   });
 
+  // PUT:Change password
+  router.post('/:name', (req,res,next) => {
+   
+    if(req.body.password != req.body.confirmpassword){
+      res.json({msg:"Password did not match."});
+    }
+
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(req.body.password, salt);
+    password = hash;
+    
+    const params = req.params;
+
+    var query = { name: params.name };
+    var newvalues = { $set: { password } };
+
+    collection.updateOne(query,newvalues, ((err, result) => {
+      if(err) throw err;
+      res.status(200).json({msg:'Password Updated'});
+     
+    })); 
+
+
+});
+
 })
 
 module.exports = router;
