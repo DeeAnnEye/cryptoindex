@@ -33,6 +33,15 @@ router.post('/', function(req, res, next) {
        res.status(400).send("Enter all fields.");
    }
 
+   var query = { email };
+
+   collection.findOne(query) 
+   .then(result=> {
+    if(result){
+      res.status(400).json({msg:"Email already exists."});
+    }
+  })
+  
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
     password = hash;

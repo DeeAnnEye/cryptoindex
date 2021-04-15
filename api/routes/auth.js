@@ -20,6 +20,10 @@ router.post('/', function(req, res, next) {
     let email = req.body.email;
     let password = req.body.password;
 
+    if(!email || !password){
+      res.status(400).send("Enter all fields.");
+  }
+
     var query = { email };
     // var projection = { 'name':1, 'email':1 };
   
