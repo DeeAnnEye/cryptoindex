@@ -18,14 +18,35 @@ client.connect(err => {
 router.post('/', function(req, res, next) {  
 
     let email = req.body.email;
+    let password = req.body.password;
 
     var query = { email };
-    var projection = { 'name':1, 'email':1 };
+    // var projection = { 'name':1, 'email':1 };
   
-    collection.findOne(query,projection) 
+    collection.findOne(query) 
       .then(result=> {
-        res.json({name:result.name,
-                  email:result.email});
+       if(result === null){
+         res.status(400).json({msg:"EmailID not found."});
+       }else{
+       let auth = bcrypt.compareSync(password, result.password);
+       if(auth === true){
+        jwt.sign({
+          name:result.name
+        },
+         config.get('jwtSecret'),
+          { expiresIn: 60 * 60 },
+          (err,token) => {
+            if(err) throw err;
+            res.status(200).json({
+              token,
+              msg:'Login Successful.'
+            });
+          });
+       }else{
+         res.status(400).json({msg:"Login Failed."})
+       }
+      }
+       
         
       }); 
   });
