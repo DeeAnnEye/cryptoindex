@@ -56,7 +56,7 @@ router.post('/', function(req, res, next) {
   });
 
   // PUT:Change password
-  router.post('/:name', (req,res,next) => {
+  router.put('/:name', (req,res,next) => {
    
     if(req.body.password != req.body.confirmpassword){
       res.json({msg:"Password did not match."});
@@ -69,13 +69,19 @@ router.post('/', function(req, res, next) {
     const params = req.params;
 
     var query = { name: params.name };
-    var newvalues = { $set: { password } };
+    var update = { $set: { password } };
+    var options = { returnNewDocument: true };
 
-    collection.updateOne(query,newvalues, ((err, result) => {
-      if(err) throw err;
-      res.status(200).json({msg:'Password Updated'});
+    collection.findOneAndUpdate(query,update,options)
+    .then(result => {
+
+      if(!result){
+        res.status(400).json({msg:'Could not update password'});
+      }else{
+        res.status(200).json({msg:'Password Updated'});
+      }
      
-    })); 
+    });
 
 
 });
