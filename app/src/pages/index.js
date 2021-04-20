@@ -15,23 +15,24 @@ import Registration from './public/Registration'
 import ForgotPassword from './public/ForgotPassword'
 
 const Index = () => {
-    const user = null;
     return (
-        <div>
-            <Router>
+
+        <Router>
+            <div>
                 <Switch>
-                    <Route path="/login">
+                    <Route exact path="/">
                         <Login />
                     </Route>
-                    <Route path="/signup">
+                    <Route exact path="/signup">
                         <Registration />
                     </Route>
-                    <Route path="/forgotpassword">
+                    <Route exact path="/forgotpassword">
                         <ForgotPassword />
                     </Route>
                 </Switch>
-            </Router>
-        </div>
+            </div>
+        </Router>
+
     )
 }
 
