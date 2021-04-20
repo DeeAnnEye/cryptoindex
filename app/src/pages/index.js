@@ -11,34 +11,26 @@ import {
 import moment from 'moment-timezone';
 import { useForm } from 'react-hook-form';
 import Login from './public/Login';
+import Registration from './public/Registration'
+import ForgotPassword from './public/ForgotPassword'
 
 const Index = () => {
     const user = null;
     return (
         <div>
-            <Switch>
-                <Route
-                    path='/'
-                    exact
-                    render={() => <Redirect to='/login' />}></Route>
-                <Route
-                    exact
-                    path='/login'
-                    component={props => {
-                        return (
-                            <div>
-                                <Login />
-
-                                {/* <Dashboard
-                                    user={user}
-                                    title='Dashboard'
-                                    date={moment().valueOf()}
-                                /> */}
-                            </div>
-                        );
-                    }}
-                />
-            </Switch>
+            <Router>
+                <Switch>
+                    <Route path="/login">
+                        <Login />
+                    </Route>
+                    <Route path="/signup">
+                        <Registration />
+                    </Route>
+                    <Route path="/forgotpassword">
+                        <ForgotPassword />
+                    </Route>
+                </Switch>
+            </Router>
         </div>
     )
 }
