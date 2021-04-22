@@ -23,7 +23,7 @@ const Index = () => {
             <div>
                 <Switch>
                     <Route exact path="/">
-                        {<Login />}
+                        <Login />
                     </Route>
                     <Route exact path="/signup">
                         <Registration />

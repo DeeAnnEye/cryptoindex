@@ -22,7 +22,7 @@ client.connect(err => {
     // console.log(email,password);
 
     if (!email || !password) {
-      return res.status(400).json({ msg: "Login Failed1." });
+      return res.status(400).json({ msg: "Login Failed." });
     }
 
     var query = { email };
@@ -38,7 +38,7 @@ client.connect(err => {
           { expiresIn: 60 * 60 },
           (err, token) => {
             if (err) {
-              return res.status(400).json({ msg: "Login Failed2.", err })
+              return res.status(400).json({ msg: "Login Failed.", err })
             }
             return res.status(200).json({
               token,
@@ -46,10 +46,10 @@ client.connect(err => {
             });
           });
       } else {
-        return res.status(400).json({ msg: "Login Failed3." })
+        return res.status(400).json({ msg: "Login Failed." })
       }
     } else {
-      return res.status(400).json({ msg: "Login Failed4." });
+      return res.status(400).json({ msg: "Login Failed." });
     }
   });
 

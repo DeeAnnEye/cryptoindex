@@ -50,17 +50,9 @@ const Login = () => {
             return;
         } else {
             const data = await response.json();
-            setLoginMsg(data.msg);
-           
-            // localStorage.setItem('token', data.token);
+            localStorage.setItem('user', data.token);
         }
     }
-
-    // function handleClick(e) {
-    //     e.preventDefault();
-    //     console.log('The link was clicked.');
-    //   }
-    console.log("loginMsg:",loginMsg);
 
     return (
         <div>
@@ -114,14 +106,14 @@ const Login = () => {
                                     <button id="form_submit" type="submit">
                                         Submit
                                          <i className="ti-arrow-right"></i></button>
-                                    <div className="login-other row mt-4">
+                                    {/* <div className="login-other row mt-4">
                                         <div className="col-6">
                                             <a className="fb-login" >Log in with <i className="fa fa-facebook"></i></a>
                                         </div>
                                         <div className="col-6">
                                             <a className="google-login">Log in with <i className="fa fa-google"></i></a>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="form-footer text-center mt-5">
                                     <p className="text-muted">Don't have an account?<Link to="/signup">Sign Up </Link></p>
@@ -136,21 +128,6 @@ const Login = () => {
 
     )
 }
-
-//  <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
-//                     <!-- bootstrap 4 js -->
-// <script src="assets/js/popper.min.js"></script>
-//                     <script src="assets/js/bootstrap.min.js"></script>
-//                     <script src="assets/js/owl.carousel.min.js"></script>
-//                     <script src="assets/js/metisMenu.min.js"></script>
-//                     <script src="assets/js/jquery.slimscroll.min.js"></script>
-//                     <script src="assets/js/jquery.slicknav.min.js"></script>
-
-//                     <!-- others plugins -->
-// <script src="assets/js/plugins.js"></script>
-//                     <script src="assets/js/scripts.js"></script> 
-
-//                 </div> 
 
 
 export default Login
