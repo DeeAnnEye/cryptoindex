@@ -1,7 +1,18 @@
 import React
 , { useState, useEffect }
-    from 'react'
+    from 'react';
 import { useForm } from 'react-hook-form';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Link,
+    Route,
+    NavLink,
+    Redirect
+    // useHistory,
+} from 'react-router-dom';
+
+// local
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/font-awesome.min.css";
 import "../assets/css/themify-icons.css";
@@ -15,22 +26,41 @@ import "../assets/css/responsive.css";
 // import "https://www.amcharts.com/lib/3/plugins/export/export.css";
 
 const Login = () => {
-    const {
-        handleSubmit,
-        register,
-        unregister,
-        errors,
-        trigger,
-        setValue,
-        getValues,
-        formState
-    } = useForm({
-        mode: 'onChange'
-    });
+    const [loginMsg, setLoginMsg] = useState('');
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-    const saveForm = (data) => {
-        console.log(data)
+    const saveForm = async (data) => {
+        // console.log(data)
+        const url = 'http://localhost:5000/auth/';
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(data)
+        })
+
+        if (!response.ok) {
+            const err = await response.json();
+            console.log('Looks like there was a problem.',
+                err);
+                // console.log(err.msg);
+                setLoginMsg(err.msg);
+            return;
+        } else {
+            const data = await response.json();
+            setLoginMsg(data.msg);
+           
+            // localStorage.setItem('token', data.token);
+        }
     }
+
+    // function handleClick(e) {
+    //     e.preventDefault();
+    //     console.log('The link was clicked.');
+    //   }
+    console.log("loginMsg:",loginMsg);
 
     return (
         <div>
@@ -47,25 +77,23 @@ const Login = () => {
                                 <p>Login, Get Started...</p>
                             </div>
                             <div className="login-form-body">
+                                {loginMsg !== '' && <div>
+                                    <p style={{color: "red", paddingBottom:"2px"}}>{loginMsg}</p>
+                                </div>}
                                 <div className="form-gp">
                                     {/* <label for="exampleInputEmail1">Email address</label> */}
                                     <input
-                                        // ref={register({
-                                        //     required: 'Email is required',
-                                        //     pattern: {
-                                        //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                        //         message: 'Invalid email address'
-                                        //     }
-                                        // })}
-                                        {...register("emailRequired", { required: true })}
-                                        type="email" id="email" name='email' placeholder="Email Address" />
+                                        {...register("email", { required: true })}
+                                        type="email" id="email" name="email" placeholder="Email Address" />
                                     <i className="ti-email"></i>
                                     <div className="text-danger"></div>
 
                                 </div>
                                 <div className="form-gp">
                                     {/* <label for="exampleInputPassword1">Password</label> */}
-                                    <input type="password" id="exampleInputPassword1" placeholder="Password" />
+                                    <input
+                                        {...register("password", { required: true })}
+                                        type="password" id="exampleInputPassword1" name="password" placeholder="Password" />
                                     <i className="ti-lock"></i>
                                     <div className="text-danger"></div>
 
@@ -74,27 +102,29 @@ const Login = () => {
                                     <div className="col-6">
                                         <div className="custom-control custom-checkbox mr-sm-2">
                                             <input type="checkbox" className="custom-control-input" id="customControlAutosizing" />
-                                            <label className="custom-control-label" for="customControlAutosizing">Remember Me</label>
+                                            <label className="custom-control-label" htmlFor="customControlAutosizing">Remember Me</label>
 
                                         </div>
                                     </div>
                                     <div className="col-6 text-right">
-                                        <a>Forgot Password?</a>
+                                        <Link to="/forgotpassword">Forgot Password </Link>
                                     </div>
                                 </div>
                                 <div className="submit-btn-area">
-                                    <button id="form_submit" type="submit">Submit <i className="ti-arrow-right"></i></button>
-                                    {/* <div className="login-other row mt-4">
-                                                <div className="col-6">
-                                                    <a className="fb-login" >Log in with <i className="fa fa-facebook"></i></a>
-                                                </div>
-                                                <div className="col-6">
-                                                    <a className="google-login">Log in with <i className="fa fa-google"></i></a>
-                                                </div>
-                                            </div> */}
+                                    <button id="form_submit" type="submit">
+                                        Submit
+                                         <i className="ti-arrow-right"></i></button>
+                                    <div className="login-other row mt-4">
+                                        <div className="col-6">
+                                            <a className="fb-login" >Log in with <i className="fa fa-facebook"></i></a>
+                                        </div>
+                                        <div className="col-6">
+                                            <a className="google-login">Log in with <i className="fa fa-google"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="form-footer text-center mt-5">
-                                    <p className="text-muted">Don't have an account? <a>Sign up</a></p>
+                                    <p className="text-muted">Don't have an account?<Link to="/signup">Sign Up </Link></p>
                                 </div>
                             </div>
                         </form>

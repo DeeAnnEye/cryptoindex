@@ -10,81 +10,79 @@ const db = config.get('mongoURI');
 const client = new MongoClient(db, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect(err => {
- 
-    const db = client.db();
-    const collection = db.collection('users');
 
-    // POST:Authenticate a user
-router.post('/', function(req, res, next) {  
+  const db = client.db();
+  const collection = db.collection('users');
 
-    let email = req.body.email;
-    let password = req.body.password;
+  // POST:Authenticate a user
+  router.post('/', async (req, res, next) => {
 
-    if(!email || !password){
-      res.status(400).send("Enter all fields.");
-  }
+    const { email, password } = req.body;
+
+    // console.log(email,password);
+
+    if (!email || !password) {
+      return res.status(400).json({ msg: "Login Failed1." });
+    }
 
     var query = { email };
-    // var projection = { 'name':1, 'email':1 };
-  
-    collection.findOne(query) 
-      .then(result=> {
-       if(result === null){
-         res.status(400).json({msg:"EmailID not found."});
-       }else{
-       let auth = bcrypt.compareSync(password, result.password);
-       if(auth === true){
+    const result = await collection.findOne(query);
+
+    if (result) {
+      let auth = bcrypt.compareSync(password, result.password);
+      if (auth === true) {
         jwt.sign({
-          name:result.name
+          name: result.name
         },
-         config.get('jwtSecret'),
+          config.get('jwtSecret'),
           { expiresIn: 60 * 60 },
-          (err,token) => {
-            if(err) throw err;
-            res.status(200).json({
+          (err, token) => {
+            if (err) {
+              return res.status(400).json({ msg: "Login Failed2.", err })
+            }
+            return res.status(200).json({
               token,
-              msg:'Login Successful.'
+              msg: 'Login Successful.'
             });
           });
-       }else{
-         res.status(400).json({msg:"Login Failed."})
-       }
+      } else {
+        return res.status(400).json({ msg: "Login Failed3." })
       }
-       
-        
-      }); 
+    } else {
+      return res.status(400).json({ msg: "Login Failed4." });
+    }
   });
 
   // PUT:Change password
-  router.put('/:name', (req,res,next) => {
-   
-    if(req.body.password != req.body.confirmpassword){
-      res.json({msg:"Password did not match."});
+  router.put('/:name', (req, res, next) => {
+
+    if (req.body.password != req.body.confirmpassword) {
+      res.json({ msg: "Password did not match." });
     }
 
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(req.body.password, salt);
     password = hash;
-    
+
     const params = req.params;
 
     var query = { name: params.name };
     var update = { $set: { password } };
     var options = { returnNewDocument: true };
 
-    collection.findOneAndUpdate(query,update,options)
-    .then(result => {
+    collection.findOneAndUpdate(query, update, options)
+      .then(result => {
 
-      if(!result){
-        res.status(400).json({msg:'Could not update password'});
-      }else{
-        res.status(200).json({msg:'Password Updated'});
-      }
-     
-    });
+        if (!result) {
+          res.status(400).json({ msg: 'Could not update password' });
+        } else {
+          res.status(200).json({ msg: 'Password Updated' });
+        }
+
+      });
 
 
-});
+  });
 
 })
 
