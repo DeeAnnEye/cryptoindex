@@ -30,7 +30,7 @@ const Dashboard = () => {
             <div className="logo">
               <a href="index.html">
                 {/* <!-- <img src="assets/images/icon/logo.png" alt="logo"/> --> */}
-                <h3 style={{ color: 'white' }, { fontWeight: 600 }}>CRYPTOINDEX</h3>
+                <h3 style={{ color:"white" , fontWeight: 600 }}>CRYPTOINDEX</h3>
               </a>
             </div>
           </div>

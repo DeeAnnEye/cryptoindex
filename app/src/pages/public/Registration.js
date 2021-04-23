@@ -32,7 +32,7 @@ const Registration = () => {
 
     const saveForm = async (data) => {
 
-        if(data.password != data.confirmpassword){
+        if(data.password !== data.confirmpassword){
            return setSignMsg("Passwords did not match");
         }else{
             delete data.confirmpassword;
