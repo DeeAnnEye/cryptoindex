@@ -48,7 +48,7 @@ const Login = () => {
 
             {/* <div id="preloader">
                 <div className="loader"></div>
-            </div> */}
+    </div> */}
             <div className="login-area">
                 <div className="container">
                     <div className="login-box ptb--70">
@@ -62,10 +62,10 @@ const Login = () => {
                                     <p style={{color: "red", paddingBottom:"2px"}}>{loginMsg}</p>
                                 </div>}
                                 <div className="form-gp">
-                                    {/* <label for="exampleInputEmail1">Email address</label> */}
+                                    {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                                     <input
                                         {...register("email", { required: true })}
-                                        type="email" id="email" name="email" placeholder="Email Address" />
+                                        type="email" id="email" name="email" placeholder="Email Address"  />
                                     <i className="ti-email"></i>
                                     <div className="text-danger"></div>
 

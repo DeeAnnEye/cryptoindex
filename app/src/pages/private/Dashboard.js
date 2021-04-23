@@ -12,8 +12,15 @@ import React
 //     // useHistory,
 // } from 'react-router-dom';
 
-
 const Dashboard = () => {
+
+  useEffect(() => {  
+    const url = 'http://localhost:5000/';
+    fetch(url)
+        .then(response => response.json())
+        .then(data => console.log(data));
+}, []);
+  
   return (
     <div>
       <div className="page-container">
