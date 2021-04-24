@@ -2,16 +2,19 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April", "May"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             datasets: [{
                 label: "Sales",
                 backgroundColor: "rgba(240, 180, 26, 0.1)",
                 borderColor: '#F0B41A',
+                fill: true,
                 data: [18, 41, 86, 49, 20, 65, 64, 50, 49, 30, 45, 25],
+                lineTension: 0.5,
             }]
 };
 
 const options = {
+    plugins: {
     legend: {
         display: false
     },
@@ -19,8 +22,8 @@ const options = {
         easing: "easeInOutBack"
     },
     scales: {
-        yAxes: [{
-            display: !1,
+        y: [{
+            display: false,
             ticks: {
                 fontColor: "rgba(0,0,0,0.5)",
                 fontStyle: "bold",
@@ -29,12 +32,12 @@ const options = {
                 padding: 0
             },
             gridLines: {
-                drawTicks: !1,
-                display: !1
+                drawTicks: false,
+                display: false
             }
         }],
-        xAxes: [{
-            display: !1,
+        x: [{
+            display: false,
             gridLines: {
                 zeroLineColor: "transparent"
             },
@@ -45,6 +48,7 @@ const options = {
             }
         }]
     }
+}
 };
 
 const CoinSalesB = () => (

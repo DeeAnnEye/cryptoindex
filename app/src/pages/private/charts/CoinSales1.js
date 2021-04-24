@@ -2,16 +2,20 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "January", "February", "March", "April", "May"],
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
         label: "Sales",
         backgroundColor: "rgba(117, 19, 246, 0.1)",
         borderColor: '#0b76b6',
+        fill: true,
         data: [18, 41, 86, 49, 20, 35, 20, 50, 49, 30, 45, 25],
+        lineTension: 0.5,
     }]
 };
 
 const options = {
+    responsive: true,
+    plugins: {
     legend: {
         display: false
     },
@@ -19,8 +23,8 @@ const options = {
         easing: "easeInOutBack"
     },
     scales: {
-        yAxes: [{
-            display: !1,
+        y: {
+            display: false,
             ticks: {
                 fontColor: "rgba(0,0,0,0.5)",
                 fontStyle: "bold",
@@ -29,28 +33,28 @@ const options = {
                 padding: 0
             },
             gridLines: {
-                drawTicks: !1,
-                display: !1
-            }
-        }],
-        xAxes: [{
-            display: !1,
+                drawTicks: false,
+                display: false
+            },
+            
+        },
+        x: {
+            display: false,
             gridLines: {
-                zeroLineColor: "transparent"
+                zeroLineColor: "transparent",
             },
             ticks: {
                 padding: 0,
                 fontColor: "rgba(0,0,0,0.5)",
                 fontStyle: "bold"
             }
-        }]
+        }
     }
+}
 };
 
-const CoinSalesA = () => (
-    // <canvas id="coin_sales1" height="100">
+const CoinSalesA = () => (   
     <Line data={data} options={options} />
-//   </canvas>
 );
 
 export default CoinSalesA;

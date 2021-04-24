@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CoinSalesA from "./charts/CoinSales1.js"
 import CoinSalesB from "./charts/CoinSales2.js"
 import CoinSalesC from "./charts/CoinSales3.js"
+import OverviewChart from "./charts/OverviewChart.js"
 
 const Dashboard = () => {
 
@@ -227,6 +228,37 @@ const Dashboard = () => {
   </div>
   }
 
+  const OverviewArea = () => {
+    return <div className="col-xl-9 col-lg-8">
+    <div className="card">
+      <div className="card-body">
+        <div
+          className="d-flex justify-content-between align-items-center"
+        >
+          <h4 className="header-title mb-0">Overview</h4>
+          <select className="custome-select border-0 pr-3">
+            <option>This Week</option>
+            <option value="0">Last Week</option>
+          </select>
+        </div>
+        {/* <div id="verview-shart"> */}
+          <OverviewChart />
+        {/* </div> */}
+      </div>
+    </div>
+  </div>
+  }
+
+  const CoinDistArea = () => {
+    return <div className="col-xl-3 col-lg-4 coin-distribution">
+    <div className="card h-full">
+      <div className="card-body">
+        <h4 className="header-title mb-0">Coin Distribution</h4>
+        <div id="coin_distribution"></div>
+      </div>
+    </div>
+  </div>
+  }
   return (
     <div>
       <div className="page-container">
@@ -276,30 +308,8 @@ const Dashboard = () => {
 
           {/* <!-- overview area start --> */}
           <div className="row">
-            <div className="col-xl-9 col-lg-8">
-              <div className="card">
-                <div className="card-body">
-                  <div
-                    className="d-flex justify-content-between align-items-center"
-                  >
-                    <h4 className="header-title mb-0">Overview</h4>
-                    <select className="custome-select border-0 pr-3">
-                      <option>Last 24 Hours</option>
-                      <option value="0">01 July 2018</option>
-                    </select>
-                  </div>
-                  <div id="verview-shart"></div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-3 col-lg-4 coin-distribution">
-              <div className="card h-full">
-                <div className="card-body">
-                  <h4 className="header-title mb-0">Coin Distribution</h4>
-                  <div id="coin_distribution"></div>
-                </div>
-              </div>
-            </div>
+            <OverviewArea />
+            <CoinDistArea />            
           </div>
           {/* <!-- overview area end --> */}
           {/* <!-- market value area start --> */}
