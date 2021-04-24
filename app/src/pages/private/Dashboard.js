@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import CoinSalesA from "./charts/CoinSales1.js"
+import CoinSalesB from "./charts/CoinSales2.js"
+import CoinSalesC from "./charts/CoinSales3.js"
 
 const Dashboard = () => {
 
@@ -155,8 +158,8 @@ const Dashboard = () => {
               <h2>$ 4567809,987</h2>
               <span>- 45.87</span>
             </div>
-          </div>
-          <canvas id="coin_sales1" height="100"></canvas>
+          </div>            
+          <CoinSalesA />         
         </div>
       </div>
       <div className="col-md-4">
@@ -172,7 +175,7 @@ const Dashboard = () => {
               <span>- 45.87</span>
             </div>
           </div>
-          <canvas id="coin_sales2" height="100"></canvas>
+          <CoinSalesB /> 
         </div>
       </div>
       <div className="col-md-4">
@@ -188,7 +191,7 @@ const Dashboard = () => {
               <span>- 45.87</span>
             </div>
           </div>
-          <canvas id="coin_sales3" height="100"></canvas>
+          <CoinSalesC /> 
         </div>
       </div>
     </div>
