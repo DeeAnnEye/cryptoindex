@@ -14,6 +14,7 @@ import Login from './public/Login';
 import Registration from './public/Registration'
 import ForgotPassword from './public/ForgotPassword'
 import Dashboard from './private/Dashboard';
+import Cookies from './private/Cookies';
 
 const Index = () => {
     const user = localStorage.getItem('user');
@@ -33,6 +34,9 @@ const Index = () => {
                     </Route>
                     <Route exact path="/dashboard">
                         <Dashboard />
+                    </Route>
+                    <Route exact path="/cookies">
+                        <Cookies />
                     </Route>
                 </Switch>
             </div>
