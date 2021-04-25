@@ -1,13 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import {SidebarHeader,SidebarMenu,SearchBar,FullscreenBtn,PageTitle,UserProfile} from './Dashboard'
+import {SidebarHeader,SidebarMenu,SearchBar,FullscreenBtn,UserProfile} from './Dashboard'
 
 const Cookies = () => {
+
   const [navclick, setNavclick] = useState(false);
   const NavbarBtn = () => {    
     return <div className="nav-btn pull-left" onClick={() => {setNavclick(!navclick)}}>
       <span></span>
       <span></span>
       <span></span>
+    </div>
+  }
+  const PageTitle = () =>{
+    return <div className="col-sm-6">
+    <div className="breadcrumbs-area clearfix">
+      <h4 className="page-title pull-left">CRYPTOINDEX</h4>
+      <ul className="breadcrumbs pull-left">
+        <li><a href="#">Dashboard</a></li>
+        <li><span>Cookies</span></li>
+      </ul>
+    </div>
+  </div>
+  }
+  const CookieContent = () => {
+    return <div>
+      <div className="main-content-inner">
+      <h1 className="page-title ml-0 mt-3" style={{color:'#7801ff'}}>Cookie Statement</h1>
+      <div className="cookie-content mt-3">
+        <p>A Cookie is a small piece of data sent from a web server and stored in a user’s web browser while the user is browsing that website. A cookie is known as an HTTP cookie, web cookie, or browser cookie.</p>
+      </div>
+      <div className="cookie-content mt-3">
+      <p>We use flask cookies to promote account security, as well as both session and persistent cookies. Any sensitive information in these cookies is encoded so that only Cryptoindex can interpret the information stored on them. The cookies are placed for the following purposes:</p>
+      </div>
+      <div className="cookie-content mt-3">
+      <p>a) Recognize you as a Cryptoindex user </p>
+
+      <p>b) Collect information about your computer to mitigate risk and help prevent fraud</p>
+
+      <p>c) Customize your experience, content, and advertising</p>
+
+      <p>d) Measure promotional effectiveness.</p>
+      </div>
+      </div>
     </div>
   }
     return (
@@ -49,7 +83,7 @@ const Cookies = () => {
             </div>
           </div>
           {/* <!-- page title area end --> */}
-         {/* <MainContent /> */}
+         <CookieContent />
         </div>
         {/* <!-- main content area end --> */}
         {/* <!-- footer area start--> */}
