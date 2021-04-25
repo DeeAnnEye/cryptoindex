@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {SidebarHeader,SidebarMenu,SearchBar,FullscreenBtn,UserProfile} from './Dashboard'
+import { Link } from 'react-router-dom';
 
 const Cookies = () => {
 
@@ -16,7 +17,7 @@ const Cookies = () => {
     <div className="breadcrumbs-area clearfix">
       <h4 className="page-title pull-left">CRYPTOINDEX</h4>
       <ul className="breadcrumbs pull-left">
-        <li><a href="#">Dashboard</a></li>
+        <li> <Link to="/dashboard">Dashboard</Link></li>
         <li><span>Cookies</span></li>
       </ul>
     </div>
@@ -33,11 +34,11 @@ const Cookies = () => {
       <p>We use flask cookies to promote account security, as well as both session and persistent cookies. Any sensitive information in these cookies is encoded so that only Cryptoindex can interpret the information stored on them. The cookies are placed for the following purposes:</p>
       </div>
       <div className="cookie-content mt-3">
-      <p>a) Recognize you as a Cryptoindex user </p>
+      <p>a) Recognize you as a Cryptoindex user </p><br />
 
-      <p>b) Collect information about your computer to mitigate risk and help prevent fraud</p>
+      <p>b) Collect information about your computer to mitigate risk and help prevent fraud</p><br />
 
-      <p>c) Customize your experience, content, and advertising</p>
+      <p>c) Customize your experience, content, and advertising</p><br />
 
       <p>d) Measure promotional effectiveness.</p>
       </div>
