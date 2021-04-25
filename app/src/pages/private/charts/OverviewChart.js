@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"],
     datasets: [{
-        label: "Overview 1",
+        label: "Bitcoin",
         backgroundColor: "rgba(117, 19, 246, 0.1)",
         borderColor: '#0b76b6',
         fill: false,
@@ -12,7 +12,7 @@ const data = {
         lineTension: 0.2,
     },
     {
-        label: "Overview 2",
+        label: "Ethereum",
         backgroundColor: "rgba(240, 180, 26, 0.1)",
         borderColor: '#F0B41A',
         fill: false,

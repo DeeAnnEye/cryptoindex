@@ -13,6 +13,8 @@ const Dashboard = () => {
   //     .then(data => console.log(data));
   // }, []);
 
+  const [navclick, setNavclick] = useState(false);
+
   const SidebarHeader = () => {
     return <div className="sidebar-header">
       <div className="logo">
@@ -24,22 +26,22 @@ const Dashboard = () => {
   }
 
   const MenuItem = ({ m }) => {
-    console.log(m);
+    // console.log(m);
     const [open, setOpen] = useState(false);
-    return <li>
+    // console.log('open',open)
+    return <li className={open ? 'active' : ''} >
       <a onClick={() => {
         setOpen(!open)
-      }} href="#" aria-expanded="true"
-      ><i className={m.icon}></i><span>{m.name}</span></a
-      >
-      {open && m.submenu.length > 0 && <ul className={`collapse ${open ? 'in' : ''}`}>
-        {m.submenu.map((sm, idx) =>
+      }} href="#" aria-expanded={open?"true":"false"}
+      ><i className={m.icon}></i><span>{m.name}</span>
+      </a>
+
+      <ul style={!open?{height:0}:{display:'block'}} className={`collapse ${open ? 'in' : ''}`}>
+        {m.submenu && m.submenu.map((sm, idx) =>
           <li key={'sm-' + idx}><a onClick={() => {
             alert('clicked' + sm.name)
           }} href="#">{sm.name}</a></li>)}
-
-
-      </ul>}
+      </ul>
     </li>
   }
 
@@ -57,60 +59,55 @@ const Dashboard = () => {
       {
         name: 'USDT'
       }]
-    }]
+    },
+    {
+      name: 'About Us',
+      icon: 'ti-info',
+      submenu: [{
+        name: 'Coin Info'
+      },
+      {
+        name: 'About Cryptoindex'
+      }]
+    },
+    {
+      name: 'Terms of Use',
+      icon: 'ti-receipt',
+      submenu: [{
+        name: 'Services'
+      },
+      {
+        name: 'Cookie Statement'
+      }]
+    },
+    {
+      name: 'Support',
+      icon: 'ti-headphone-alt',
+      submenu: [{
+        name: 'How it Works'
+
+      },
+      {
+        name: "FAQ's"
+      },
+      {
+        name: 'Contact Us'
+      }]
+    },
+  ]
     return <div className="main-menu">
-      {/* <div className="menu-inner"> */}
+      <div className="menu-inner" style={{overflowY:'hidden'}}>
       <nav>
         <ul className="metismenu" id="menu">
-          {menu.map((m, idx) => <MenuItem key={'menuitem-' + idx} m={m} />)}
-          {/* <li>
-          <a href="#" aria-expanded="true"
-          ><i className="ti-bar-chart"></i><span>Markets</span></a
-          >
-          <ul className="collapse">
-           
-            <li><a href="#">INR</a></li>
-           
-            <li><a href="#">BTC</a></li>
-            <li><a href="#">USDT</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" aria-expanded="true"
-          ><i className="ti-headphone-alt"></i><span>support</span></a
-          >
-          <ul className="collapse">
-           
-            <li><a href="index.html">How It Works</a></li>
-            
-            <li><a href="index.html">FAQ's</a></li>
-            <li><a href="index3.html">Contact Us</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" aria-expanded="true"
-          ><i className="ti-info"></i><span>About Us</span></a
-          >
-          <ul className="collapse">
-           
-            <li><a href="#">Coin Info</a></li>
-           
-            <li><a href="#">About Cryptoindex</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#"
-          ><i className="ti-receipt"></i> <span>Terms of Use</span></a
-          >
-        </li> */}
+          {menu.map((m, idx) => <MenuItem key={'menuitem-' + idx} m={m} />)}          
         </ul>
       </nav>
-      {/* </div> */}
+      </div>
     </div>
   }
 
-  const NavbarBtn = () => {
-    return <div className="nav-btn pull-left">
+  const NavbarBtn = () => {    
+    return <div className="nav-btn pull-left" onClick={() => {setNavclick(!navclick)}}>
       <span></span>
       <span></span>
       <span></span>
@@ -218,7 +215,7 @@ const Dashboard = () => {
       alt="avatar"
     />
     <h4 className="user-name dropdown-toggle" data-toggle="dropdown">
-      Daniela Justin <i className="fa fa-angle-down"></i>
+      Daniela Justin 
     </h4>
     <div className="dropdown-menu">
       <a className="dropdown-item" href="#">Message</a>
@@ -259,9 +256,11 @@ const Dashboard = () => {
     </div>
   </div>
   }
+
+
   return (
     <div>
-      <div className="page-container">
+      <div className={`page-container ${navclick ? 'sbar_collapsed' : ''}`}>
         {/* <!-- sidebar menu area start --> */}
         <div className="sidebar-menu">
           <SidebarHeader />
@@ -296,10 +295,10 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          {/* <!-- page title area end --> */}
         </div>
         {/* <!-- page title area end --> */}
         <div className="main-content-inner">
+
           {/* <!-- sales report area start --> */}
           <div className="sales-report-area mt-5 mb-5">
             <SalesCard />
@@ -312,6 +311,7 @@ const Dashboard = () => {
             <CoinDistArea />            
           </div>
           {/* <!-- overview area end --> */}
+
           {/* <!-- market value area start --> */}
           <div className="row mt-5 mb-5">
             <div className="col-12">

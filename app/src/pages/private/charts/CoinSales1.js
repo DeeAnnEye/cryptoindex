@@ -14,7 +14,7 @@ const data = {
 };
 
 const options = {
-    responsive: true,
+    // responsive: true,
     plugins: {
     legend: {
         display: false
@@ -23,38 +23,42 @@ const options = {
         easing: "easeInOutBack"
     },
     scales: {
-        y: {
-            display: false,
+        yAxes: {
+            // display: false,
             ticks: {
-                fontColor: "rgba(0,0,0,0.5)",
-                fontStyle: "bold",
+                // fontColor: "rgba(0,0,0,0.5)",
+                // fontStyle: "bold",
                 beginAtZero: !0,
-                maxTicksLimit: 5,
-                padding: 0
+                display: false,
+                // maxTicksLimit: 5,
+                // padding: 0
             },
             gridLines: {
-                drawTicks: false,
+                // drawTicks: false,
+                drawBorder: false,
                 display: false
             },
             
         },
-        x: {
-            display: false,
+        xAxes: {            
             gridLines: {
                 zeroLineColor: "transparent",
+                display: false,
+                drawBorder: false,
             },
             ticks: {
-                padding: 0,
-                fontColor: "rgba(0,0,0,0.5)",
-                fontStyle: "bold"
+                // padding: 0,
+                display: false,
+                // fontColor: "rgba(0,0,0,0.5)",
+                // fontStyle: "bold"
             }
         }
     }
-}
+    }
 };
 
-const CoinSalesA = () => (   
-    <Line data={data} options={options} />
+const CoinSalesA = () => (     
+    <Line data={data} options={options} />   
 );
 
 export default CoinSalesA;
