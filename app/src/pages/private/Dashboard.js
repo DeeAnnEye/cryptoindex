@@ -3,6 +3,7 @@ import CoinSalesA from "./charts/CoinSales1.js"
 import CoinSalesB from "./charts/CoinSales2.js"
 import CoinSalesC from "./charts/CoinSales3.js"
 import OverviewChart from "./charts/OverviewChart.js"
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,9 +30,7 @@ const MenuItem = ({ m }) => {
 
     <ul style={!open?{height:0}:{display:'block'}} className={`collapse ${open ? 'in' : ''}`}>
       {m.submenu && m.submenu.map((sm, idx) =>
-        <li key={'sm-' + idx}><a onClick={() => {
-          alert('clicked' + sm.name)
-        }} href="#">{sm.name}</a></li>)}
+        <li key={'sm-' + idx}><Link to={`${sm.path}`}>{sm.name}</Link></li>)}
     </ul>
   </li>
 }
@@ -41,48 +40,57 @@ const SidebarMenu = () => {
     name: 'Markets',
     icon: 'ti-bar-chart',
     submenu: [{
-      name: 'INR'
-
+      name: 'INR',
+      path: '/markets/inr'
     },
     {
-      name: 'BTC'
+      name: 'BTC',
+      path: '/markets/btc'
     },
     {
-      name: 'USDT'
+      name: 'USDT',
+      path: '/markets/usdt'
     }]
   },
   {
     name: 'About Us',
     icon: 'ti-info',
     submenu: [{
-      name: 'Coin Info'
+      name: 'Coin Info',
+      path: '/about/coininfo'
     },
     {
-      name: 'About Cryptoindex'
+      name: 'About Cryptoindex',
+      path: '/about'
     }]
   },
   {
     name: 'Terms of Use',
     icon: 'ti-receipt',
     submenu: [{
-      name: 'Services'
+      name: 'Security',
+      path: '/security'
     },
     {
-      name: 'Cookie Statement'
+      name: 'Cookie Statement',
+      path: '/cookies'
     }]
   },
   {
     name: 'Support',
     icon: 'ti-headphone-alt',
     submenu: [{
-      name: 'How it Works'
+      name: 'How it Works',
+      path: '/support'
 
     },
     {
-      name: "FAQ's"
+      name: "FAQ's",
+      path: '/faqs'
     },
     {
-      name: 'Contact Us'
+      name: 'Contact Us',
+      path: '/contacts'
     }]
   },
 ]
