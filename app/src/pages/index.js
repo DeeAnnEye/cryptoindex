@@ -19,6 +19,8 @@ import Security from './private/Security';
 import ContactUs from './private/ContactUs';
 import Faqs from './private/Faqs';
 import About from './private/About';
+import Wallets from './private/Wallets';
+import Markets from './private/Markets';
 
 const Index = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,6 +60,12 @@ const Index = () => {
                     </Route>
                     <Route exact path="/faqs">
                     {user ? <Faqs/> :<Login />}                    
+                    </Route>
+                    <Route exact path="/wallets">
+                    {user ? <Wallets/> :<Login />}                    
+                    </Route>
+                    <Route exact path="/buycoins">
+                    {user ? <Markets/> :<Login />}                    
                     </Route>
                 </Switch>
             </div>

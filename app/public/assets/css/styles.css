@@ -139,6 +139,12 @@
     opacity: 0.1!important;
 }
 
+.wallet-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .sidebar-header {
     padding: 19px 32px 20px;
     background: #303641;

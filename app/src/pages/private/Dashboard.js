@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import SocketContext from '../../context';
 import CoinSalesA from "./charts/CoinSales1.js"
 import CoinSalesB from "./charts/CoinSales2.js"
 import CoinSalesC from "./charts/CoinSales3.js"
@@ -40,26 +41,22 @@ const SidebarMenu = () => {
     name: 'Markets',
     icon: 'ti-bar-chart',
     submenu: [{
-      name: 'INR',
-      path: '/markets/inr'
+      name: 'Buy and Sell Coins',
+      path: '/buycoins'
     },
     {
-      name: 'BTC',
-      path: '/markets/btc'
-    },
-    {
-      name: 'USDT',
-      path: '/markets/usdt'
+      name: 'Wallets',
+      path: '/wallets'
     }]
   },
   {
     name: 'About Us',
     icon: 'ti-info',
     submenu: [
-    {
-      name: 'About Cryptoindex',
-      path: '/about'
-    }]
+      {
+        name: 'About Cryptoindex',
+        path: '/about'
+      }]
   },
   {
     name: 'Terms of Use',
@@ -77,14 +74,14 @@ const SidebarMenu = () => {
     name: 'Support',
     icon: 'ti-headphone-alt',
     submenu: [
-    {
-      name: "FAQ's",
-      path: '/faqs'
-    },
-    {
-      name: 'Contact Us',
-      path: '/contacts'
-    }]
+      {
+        name: "FAQ's",
+        path: '/faqs'
+      },
+      {
+        name: 'Contact Us',
+        path: '/contacts'
+      }]
   },
   ]
   return <div className="main-menu">
@@ -152,7 +149,7 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
       alt="avatar"
     />
     <h4 className="user-name dropdown-toggle" data-toggle="dropdown" aria-expanded={show ? "true" : "false"} onClick={() => { setShow(!show) }}>
-    {`${username}`} <i className="fa fa-angle-down"></i>
+      {`${username}`} <i className="fa fa-angle-down"></i>
     </h4>
     <div className={`dropdown-menu ${show ? 'show' : ''}`}>
       {/* <a className="dropdown-item" href="#">Message</a> */}
@@ -165,15 +162,28 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
 }
 
 const Dashboard = ({ user, setIsLoggedIn }) => {
+  const socket = useContext(SocketContext);
+  const [price, setPrice] = useState([]);
+
 
   useEffect(() => {
-    const url = 'http://localhost:5000/';
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-      })
-  }, []);
+    if (socket) {
+      socket.emit('get-price', {})
+      socket.on('price', ({ data }) => {
+        console.log(data)
+        setPrice(data);
+      });
+
+
+    }
+    return () => {
+      if (socket) {
+        socket.off('price');
+
+      }
+    };
+  }, [socket]);
+
 
   const [navclick, setNavclick] = useState(false);
   const NavbarBtn = () => {
@@ -183,10 +193,30 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
       <span></span>
     </div>
   }
-
+  
+  const Card = ({item}) =>{
+    console.log('item',item);
+    return  <div className="col-md-4">
+    <div className="single-report mb-xs-30">
+      <div className="s-report-inner pr--20 pt--30 mb-3">
+        <div className="icon"><i className="fa fa-btc"></i></div>
+        <div className="s-report-title d-flex justify-content-between">
+          <h4 className="header-title mb-0">{item ? item.name : '-' }</h4>
+          <p>24 H</p>
+        </div>
+        <div className="d-flex justify-content-between pb-2">
+          <h2>$ {item ? parseFloat( item.price).toFixed(2) : '0' }</h2>
+          <span>{item && item['1d'] ? parseFloat( item['1d'].price_change_pct).toFixed(2) : '0' }</span>
+        </div>
+      </div>
+      <CoinSalesA />
+    </div>
+  </div>
+  }
   const SalesCard = () => {
     return <div className="row">
-      <div className="col-md-4">
+      {price && price.length>0 && price.slice(0,3).map(p => <Card item={p} />)}
+      {/* <div className="col-md-4">
         <div className="single-report mb-xs-30">
           <div className="s-report-inner pr--20 pt--30 mb-3">
             <div className="icon"><i className="fa fa-btc"></i></div>
@@ -201,8 +231,8 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
           </div>
           <CoinSalesA />
         </div>
-      </div>
-      <div className="col-md-4">
+      </div> */}
+      {/* <div className="col-md-4">
         <div className="single-report mb-xs-30">
           <div className="s-report-inner pr--20 pt--30 mb-3">
             <div className="icon"><i className="fa fa-btc"></i></div>
@@ -217,8 +247,8 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
           </div>
           <CoinSalesB />
         </div>
-      </div>
-      <div className="col-md-4">
+      </div> */}
+      {/* <div className="col-md-4">
         <div className="single-report">
           <div className="s-report-inner pr--20 pt--30 mb-3">
             <div className="icon"><i className="fa fa-eur"></i></div>
@@ -233,7 +263,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
           </div>
           <CoinSalesC />
         </div>
-      </div>
+      </div> */}
     </div>
   }
 
