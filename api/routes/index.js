@@ -49,7 +49,7 @@ router.get('/', async (req, res, next) => {
     const data = await getPrice();
     // console.log(data);
     // .then((data) => {console.log(data)});
-    res.json({ data })
+    res.json(data)
 
 })
 

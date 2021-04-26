@@ -17,6 +17,7 @@ import Dashboard from './private/Dashboard';
 import Cookies from './private/Cookies';
 import Security from './private/Security';
 import ContactUs from './private/ContactUs';
+import Faqs from './private/Faqs';
 
 const Index = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,6 +51,9 @@ const Index = () => {
                     </Route>
                     <Route exact path="/contacts">
                     {user ?<ContactUs />:<Login />}
+                    </Route>
+                    <Route exact path="/faqs">
+                    {user ? <Faqs/> :<Login />}                    
                     </Route>
                 </Switch>
             </div>

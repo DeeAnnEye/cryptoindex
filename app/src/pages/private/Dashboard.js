@@ -79,11 +79,7 @@ const SidebarMenu = () => {
   {
     name: 'Support',
     icon: 'ti-headphone-alt',
-    submenu: [{
-      name: 'How it Works',
-      path: '/support'
-
-    },
+    submenu: [
     {
       name: "FAQ's",
       path: '/faqs'
@@ -186,12 +182,12 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
 
 const Dashboard = ({ user, setIsLoggedIn }) => {
 
-  // useEffect(() => {
-  //   const url = 'http://localhost:5000/';
-  //   fetch(url)
-  //     .then(response => response.json())
-  //     .then(data => console.log(data));
-  // }, []);
+  useEffect(() => {
+    const url = 'http://localhost:5000/';
+    fetch(url)
+      .then(response => response.json())
+      .then(data => console.log(data));
+  }, []);
 
   const [navclick, setNavclick] = useState(false);
   const NavbarBtn = () => {
