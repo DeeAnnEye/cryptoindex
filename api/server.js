@@ -3,12 +3,14 @@ var express = require('express');
 var path = require('path');
 var cors = require('cors');
 var logger = require('morgan');
+const io = require('./io');
 
 var usersRouter = require('./routes/users');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth')
 
 var app = express();
+app.io = io;
 
 app.use(logger('dev'));
 app.use(express.json());

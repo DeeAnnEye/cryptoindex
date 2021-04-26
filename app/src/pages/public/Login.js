@@ -14,32 +14,37 @@ import {
 
 
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
     const [loginMsg, setLoginMsg] = useState('');
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     const saveForm = async (data) => {
-        // console.log(data)
-        const url = 'http://localhost:5000/auth/';
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify(data)
-        })
+        try {
+            const url = 'http://localhost:5000/auth/';
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
 
-        if (!response.ok) {
-            const err = await response.json();
-            console.log('Looks like there was a problem.',
-                err);
+            if (!response.ok) {
+                const err = await response.json();
+                console.log('Looks like there was a problem.',
+                    err);
                 // console.log(err.msg);
                 setLoginMsg(err.msg);
-            return;
-        } else {
-            const data = await response.json();
-            localStorage.setItem('user', data.token);
+                return;
+            } else {
+                const data = await response.json();
+                localStorage.setItem('user', JSON.stringify({ token: data.token }));
+                setIsLoggedIn(true);
+            }
+        } catch (err) {
+            console.log(err)
+
         }
     }
 
@@ -59,13 +64,13 @@ const Login = () => {
                             </div>
                             <div className="login-form-body">
                                 {loginMsg !== '' && <div>
-                                    <p style={{color: "red", paddingBottom:"2px"}}>{loginMsg}</p>
+                                    <p style={{ color: "red", paddingBottom: "2px" }}>{loginMsg}</p>
                                 </div>}
                                 <div className="form-gp">
                                     {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                                     <input
                                         {...register("email", { required: true })}
-                                        type="email" id="email" name="email" placeholder="Email Address"  />
+                                        type="email" id="email" name="email" placeholder="Email Address" />
                                     <i className="ti-email"></i>
                                     <div className="text-danger"></div>
 

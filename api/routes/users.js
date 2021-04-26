@@ -49,6 +49,7 @@ router.post('/', function(req, res, next) {
         
       collection.insertOne({ email,password,name }, ((err, result) => {
         if(err) throw err;
+      
         jwt.sign({
           name
         },

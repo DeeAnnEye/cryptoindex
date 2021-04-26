@@ -5,9 +5,9 @@ const axios = require('axios');
 
 const getPrice = async () => {
     try {
-        const response = await axios.get(`https://api.nomics.com/v1/currencies/ticker?key=df4f2c2bf8926feecee70b01bf6ec9f9&convert=USD&per-page=10&page=1`)
-        // console.log(response);
-        // return response;
+        const { data } = await axios.get(`https://api.nomics.com/v1/currencies/ticker?key=df4f2c2bf8926feecee70b01bf6ec9f9&convert=USD&per-page=10&page=1`)
+        // console.log(response.data);
+        return data;
     } catch (error) {
         console.error(error)
     }
