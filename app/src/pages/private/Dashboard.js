@@ -146,6 +146,7 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
 
     localStorage.removeItem('user');
     setIsLoggedIn(false);
+    window.location.reload();
     // try {
     //   const { success } = await fetch('http://localhost:5000/logout', {
     //     method: 'GET',

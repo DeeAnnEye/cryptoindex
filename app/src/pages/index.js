@@ -30,23 +30,26 @@ const Index = () => {
                     <Route exact path="/">
                         {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
+                    <Route exact path="/login">
+                        <Login />
+                    </Route>
                     <Route exact path="/signup">
-                        <Registration />
+                    {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> :<Registration setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/forgotpassword">
                         <ForgotPassword />
                     </Route>
                     <Route exact path="/dashboard">
-                        <Dashboard />
+                        {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/cookies">
-                        <Cookies />
+                        {user ? <Cookies /> : <Login />}
                     </Route>
                     <Route exact path="/security">
-                        <Security />
+                    {user ?<Security />:<Login />}
                     </Route>
                     <Route exact path="/contacts">
-                        <ContactUs />
+                    {user ?<ContactUs />:<Login />}
                     </Route>
                 </Switch>
             </div>
