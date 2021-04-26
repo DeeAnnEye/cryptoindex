@@ -55,10 +55,7 @@ const SidebarMenu = () => {
   {
     name: 'About Us',
     icon: 'ti-info',
-    submenu: [{
-      name: 'Coin Info',
-      path: '/about/coininfo'
-    },
+    submenu: [
     {
       name: 'About Cryptoindex',
       path: '/about'
@@ -143,23 +140,10 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
     localStorage.removeItem('user');
     setIsLoggedIn(false);
     window.location.reload();
-    // try {
-    //   const { success } = await fetch('http://localhost:5000/logout', {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: 'Bearer ' + user.token
-    //     }
-    //   });
-    //   if (success) {
-    //     localStorage.removeItem('user');
-    //     setIsLoggedIn(false);
-    //   }
-    // } catch (err) {
-    //   console.log(err)
-    // }
   }
 
+  var username = localStorage.getItem('username');
+  // console.log(username)
 
   return <div className={`user-profile pull-right ${show ? 'show' : ''}`}>
     <img
@@ -168,11 +152,11 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
       alt="avatar"
     />
     <h4 className="user-name dropdown-toggle" data-toggle="dropdown" aria-expanded={show ? "true" : "false"} onClick={() => { setShow(!show) }}>
-      Daniela Justin <i className="fa fa-angle-down"></i>
+    {`${username}`} <i className="fa fa-angle-down"></i>
     </h4>
     <div className={`dropdown-menu ${show ? 'show' : ''}`}>
       {/* <a className="dropdown-item" href="#">Message</a> */}
-      <a className="dropdown-item" href="#">Settings</a>
+      {/* <a className="dropdown-item" href="#">Settings</a> */}
       <a onClick={() => {
         logout();
       }} className="dropdown-item" href="#">Log Out</a>
@@ -186,7 +170,9 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     const url = 'http://localhost:5000/';
     fetch(url)
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data);
+      })
   }, []);
 
   const [navclick, setNavclick] = useState(false);

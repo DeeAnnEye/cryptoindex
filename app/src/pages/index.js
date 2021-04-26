@@ -18,6 +18,7 @@ import Cookies from './private/Cookies';
 import Security from './private/Security';
 import ContactUs from './private/ContactUs';
 import Faqs from './private/Faqs';
+import About from './private/About';
 
 const Index = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +46,9 @@ const Index = () => {
                     </Route>
                     <Route exact path="/cookies">
                         {user ? <Cookies /> : <Login />}
+                    </Route>
+                    <Route exact path="/about">
+                        {user ? <About/> : <Login />}
                     </Route>
                     <Route exact path="/security">
                     {user ?<Security />:<Login />}

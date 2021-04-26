@@ -41,6 +41,7 @@ client.connect(err => {
               return res.status(400).json({ msg: "Login Failed.", err })
             }
             return res.status(200).json({
+              name:result.name,
               token,
               msg: 'Login Successful.'
             });
