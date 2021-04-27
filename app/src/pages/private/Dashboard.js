@@ -193,77 +193,34 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
       <span></span>
     </div>
   }
-  
-  const Card = ({item}) =>{
-    console.log('item',item);
-    return  <div className="col-md-4">
-    <div className="single-report mb-xs-30">
-      <div className="s-report-inner pr--20 pt--30 mb-3">
-        <div className="icon"><i className="fa fa-btc"></i></div>
-        <div className="s-report-title d-flex justify-content-between">
-          <h4 className="header-title mb-0">{item ? item.name : '-' }</h4>
-          <p>24 H</p>
+
+  const Card = ({ item }) => {
+    // console.log('item',item);
+    return <div className="col-md-4">
+      <div className="single-report mb-xs-30">
+        <div className="s-report-inner pr--20 pt--30 mb-3">
+          <div className="iconimg"><img
+            className="coin-img"
+            src={item ? item.logo_url : ''}
+            alt="avatar"
+            style={{ height: '50px', width: '50px' }}
+          /></div>
+          <div className="s-report-title d-flex justify-content-between">
+            <h4 className="header-title mb-0">{item ? item.name : '-'}</h4>
+            <p>24 H</p>
+          </div>
+          <div className="d-flex justify-content-between pb-2">
+            <h2>$ {item ? parseFloat(item.price).toFixed(2) : '0'}</h2>
+            <span>{item && item['1d'] ? parseFloat(item['1d'].price_change_pct).toFixed(2) : '0'}</span>
+          </div>
         </div>
-        <div className="d-flex justify-content-between pb-2">
-          <h2>$ {item ? parseFloat( item.price).toFixed(2) : '0' }</h2>
-          <span>{item && item['1d'] ? parseFloat( item['1d'].price_change_pct).toFixed(2) : '0' }</span>
-        </div>
+        <CoinSalesA />
       </div>
-      <CoinSalesA />
     </div>
-  </div>
   }
   const SalesCard = () => {
     return <div className="row">
-      {price && price.length>0 && price.slice(0,3).map(p => <Card item={p} />)}
-      {/* <div className="col-md-4">
-        <div className="single-report mb-xs-30">
-          <div className="s-report-inner pr--20 pt--30 mb-3">
-            <div className="icon"><i className="fa fa-btc"></i></div>
-            <div className="s-report-title d-flex justify-content-between">
-              <h4 className="header-title mb-0">Bitcoin</h4>
-              <p>24 H</p>
-            </div>
-            <div className="d-flex justify-content-between pb-2">
-              <h2>$ 4567809,987</h2>
-              <span>- 45.87</span>
-            </div>
-          </div>
-          <CoinSalesA />
-        </div>
-      </div> */}
-      {/* <div className="col-md-4">
-        <div className="single-report mb-xs-30">
-          <div className="s-report-inner pr--20 pt--30 mb-3">
-            <div className="icon"><i className="fa fa-btc"></i></div>
-            <div className="s-report-title d-flex justify-content-between">
-              <h4 className="header-title mb-0">Bitcoin Dash</h4>
-              <p>24 H</p>
-            </div>
-            <div className="d-flex justify-content-between pb-2">
-              <h2>$ 4567809,987</h2>
-              <span>- 45.87</span>
-            </div>
-          </div>
-          <CoinSalesB />
-        </div>
-      </div> */}
-      {/* <div className="col-md-4">
-        <div className="single-report">
-          <div className="s-report-inner pr--20 pt--30 mb-3">
-            <div className="icon"><i className="fa fa-eur"></i></div>
-            <div className="s-report-title d-flex justify-content-between">
-              <h4 className="header-title mb-0">Euthorium</h4>
-              <p>24 H</p>
-            </div>
-            <div className="d-flex justify-content-between pb-2">
-              <h2>$ 4567809,987</h2>
-              <span>- 45.87</span>
-            </div>
-          </div>
-          <CoinSalesC />
-        </div>
-      </div> */}
+      {price && price.length > 0 && price.slice(0, 3).map(p => <Card item={p} />)}
     </div>
   }
 
@@ -476,6 +433,22 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     </div>
   }
 
+  const LivePriceList = ({ item }) => {
+    return <li>
+      {/* <div className="iconimg"> */}
+        <img
+            className="coin-img"
+            src={item ? item.logo_url : ''}
+            alt="avatar"
+            style={{ height: '20px', width: '20px' }}
+          />
+          {/* </div> */}
+      {item ? item.name : '-' }<span>
+        <i className={(item.price<5.0) ? 'fa fa-long-arrow-down' : 'fa fa-long-arrow-up'}></i>
+        $ {item ? parseFloat(item.price).toFixed(2) : '0'}</span>
+    </li>
+  }
+
   const LiveCryptoPrice = () => {
     return <div className="col-lg-4">
       <div className="card">
@@ -483,48 +456,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
           <h4 className="header-title">Live Crypto Price</h4>
           <div className="cripto-live mt-5">
             <ul>
-              <li>
-                <div className="icon b">b</div>
-              Bitcoin<span
-                ><i className="fa fa-long-arrow-up"></i>$876909.00</span
-                >
-              </li>
-              <li>
-                <div className="icon l">l</div>
-              Litecoin<span
-                ><i className="fa fa-long-arrow-up"></i>$29780.00</span
-                >
-              </li>
-              <li>
-                <div className="icon d">d</div>
-              Dashcoin<span
-                ><i className="fa fa-long-arrow-up"></i>$13276.00</span
-                >
-              </li>
-              <li>
-                <div className="icon b">b</div>
-              Bitcoindash<span
-                ><i className="fa fa-long-arrow-down"></i>$5684.890</span
-                >
-              </li>
-              <li>
-                <div className="icon e">e</div>
-              Euthorium<span
-                ><i className="fa fa-long-arrow-down"></i>$3890.98</span
-                >
-              </li>
-              <li>
-                <div className="icon t">b</div>
-              Tcoin<span
-                ><i className="fa fa-long-arrow-up"></i>$750.789</span
-                >
-              </li>
-              <li>
-                <div className="icon b">b</div>
-              Bitcoin<span
-                ><i className="fa fa-long-arrow-up"></i>$325.037</span
-                >
-              </li>
+              {price && price.length > 0 && price.slice(0, 8).map(p => <LivePriceList item={p} />)}
             </ul>
           </div>
         </div>
@@ -737,7 +669,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
   }
 
   const MainContent = () => {
-    return <div className="main-content-inner">
+    return <div className="main-content-inner ">
       {/* <!-- sales report area start --> */}
       <div className="sales-report-area mt-5 mb-5">
         <SalesCard />

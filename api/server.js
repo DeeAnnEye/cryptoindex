@@ -30,7 +30,7 @@ const getPrice = async () => {
 
 const sendPrice = () => {
     cron.schedule('*/10 * * * * *', async () => {
-        console.log('running a task every 20 seconds');
+        console.log('running a task every 10 seconds');
         crypto.emit('price', { data: await getPrice() })
     });
 }

@@ -18,9 +18,9 @@ const options = {
     legend: {
         display: false
     },
-    animation: {
-        easing: "easeInOutBack"
-    },
+    // animation: {
+    //     easing: "easeInOutBack"
+    // },
     scales: {
         y: [{
             display: false,
