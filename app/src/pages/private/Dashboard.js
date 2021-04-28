@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import SocketContext from '../../context';
-import CoinSalesA from "./charts/CoinSales1.js"
-import CoinSalesB from "./charts/CoinSales2.js"
-import CoinSalesC from "./charts/CoinSales3.js"
-import OverviewChart from "./charts/OverviewChart.js"
+// import CoinSalesA from "./charts/CoinSales1.js"
+// import CoinSalesB from "./charts/CoinSales2.js"
+// import CoinSalesC from "./charts/CoinSales3.js"
+// import OverviewChart from "./charts/OverviewChart.js"
+import { Line } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 
 
@@ -161,6 +162,67 @@ const UserProfile = ({ user, setIsLoggedIn }) => {
   </div>
 }
 
+const ExchangeArea = () => {
+  const [showA, setShowA] = useState(false);
+  const [showB, setShowB] = useState(false);
+  const [coinPrice, setCoinPrice] = useState(0);
+  const [coinType, setCoinType] = useState('BTC');
+  const [coinCur, setCoinCur] = useState('USD');
+
+ const coinConvert = async(coinType,coinCur) =>{
+  //  console.log(coinType);
+  const response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=df4f2c2bf8926feecee70b01bf6ec9f9&ids=${coinType}&convert=${coinCur}`)
+  const data = await response.json();
+  // let price = JSON.stringify(data);
+  // console.log(price);
+ }
+
+  return <div className="col-xl-6 mt-md-30 mt-xs-30 mt-sm-30">
+    <div className="card">
+      <div className="card-body">
+        <h4 className="header-title">Exchange</h4>
+        <div className="exhcange-rate mt-5">
+          <form action="#">
+            <div className="input-form">
+              <input type="text" onChange={e => {
+                setCoinPrice(e.target.value)
+                coinConvert(coinType,coinCur);
+                }} />
+              <h4 className="coin-price " data-toggle="dropdown" aria-expanded={showA ? "true" : "false"} onClick={() => { setShowA(!showA) }}>
+                <span>{coinType}</span>
+              </h4>
+              <div className={`dropdown-menu ${showA ? 'show' : ''}`}>
+                <option onClick={(e) => setCoinType(e.target.value)} className="dropdown-item" value="BTC">BTC</option>
+                <option onClick={(e) => setCoinType(e.target.value)} className="dropdown-item" value="ETH">ETH</option>
+                <option onClick={(e) => setCoinType(e.target.value)} className="dropdown-item" value="BNB">BNB</option>
+                <option onClick={(e) => setCoinType(e.target.value)} className="dropdown-item" value="XRP">XRP</option>
+                <option onClick={(e) => setCoinType(e.target.value)} className="dropdown-item" value="BNC">BNC</option>
+             </div>
+            </div>
+            <div className="exchange-devider">To</div>
+            <div className="input-form">
+              <input type="text"/>
+              <h4 className="coin-cur " data-toggle="dropdown" aria-expanded={showB ? "true" : "false"} onClick={() => { setShowB(!showB) }}>
+                <span>{coinCur}</span>
+              </h4>
+              <div className={`dropdown-menu ${showB ? 'show' : ''}`}>
+                <option onClick={(e) => setCoinCur(e.target.value)} className="dropdown-item" value="USD">USD</option>
+                <option onClick={(e) => setCoinCur(e.target.value)} className="dropdown-item" value="INR">INR</option>
+                <option onClick={(e) => setCoinCur(e.target.value)} className="dropdown-item" value="EUR">EUR</option>
+                <option onClick={(e) => setCoinCur(e.target.value)} className="dropdown-item" value="YEN">YEN</option>
+                <option onClick={(e) => setCoinCur(e.target.value)} className="dropdown-item" value="RUB">RUB</option>
+             </div>
+            </div>
+            <div className="exchange-btn">
+              <button type="submit">Exchange Now</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
 const Dashboard = ({ user, setIsLoggedIn }) => {
   const socket = useContext(SocketContext);
   const [price, setPrice] = useState([]);
@@ -214,7 +276,18 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
             <span>{item && item['1d'] ? parseFloat(item['1d'].price_change_pct).toFixed(2) : '0'}</span>
           </div>
         </div>
-        <CoinSalesA />
+        {/* <Line data={
+           labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [{
+        label: "Sales",
+        backgroundColor: "rgba(117, 19, 246, 0.1)",
+        borderColor: '#0b76b6',
+        fill: true,
+        data: [18, 41, 86, 49, 20, 35, 20, 50, 49, 30, 45, 25],
+        lineTension: 0.5,
+    }]
+        } options={options} /> */}
+        {/* <CoinSalesA /> */}
       </div>
     </div>
   }
@@ -232,13 +305,13 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
             className="d-flex justify-content-between align-items-center"
           >
             <h4 className="header-title mb-0">Overview</h4>
-            <select className="custome-select border-0 pr-3">
+            {/* <select className="custome-select border-0 pr-3">
               <option>This Week</option>
               <option value="0">Last Week</option>
-            </select>
+            </select> */}
           </div>
           {/* <div id="verview-shart"> */}
-          <OverviewChart />
+          {/* <OverviewChart /> */}
           {/* </div> */}
         </div>
       </div>
@@ -256,6 +329,30 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     </div>
   }
 
+  const MarketValueList = ({item}) => {
+    return <tr>
+    <td className="mv-icon">
+    <img
+        className="coin-img"
+        src={item ? item.logo_url : ''}
+        alt="avatar"
+        style={{ height: '30px', width: '30px' }}
+      />
+    </td>
+    <td className="coin-name">{item ? item.name : '-'}</td>
+    <td className="buy">
+    {item ? item.num_exchanges : '-'}  
+    </td>
+    <td className="sell">
+    {item ? item.num_pairs : '-'}
+    </td>
+    <td className="status">
+    {item ? item.status.green : '-'}
+    </td>
+    <td className="stats">{item ? item.circulating_supply : '-'}</td>                      
+  </tr>
+  }
+
   const MarketValue = () => {
     return <div className="row mt-5 mb-5">
       <div className="col-12">
@@ -265,10 +362,10 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
               className="d-sm-flex justify-content-between align-items-center"
             >
               <h4 className="header-title mb-0">Market Value And Trends</h4>
-              <select className="custome-select border-0 pr-3">
+              {/* <select className="custome-select border-0 pr-3">
                 <option>Last 24 Hours</option>
                 <option value="0">01 July 2018</option>
-              </select>
+              </select> */}
             </div>
             <div className="market-status-table mt-4">
               <div className="table-responsive">
@@ -277,152 +374,14 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
                     <tr className="heading-td">
                       <td className="mv-icon">Logo</td>
                       <td className="coin-name">Coin Name</td>
-                      <td className="buy">Buy</td>
-                      <td className="sell">Sells</td>
-                      <td className="trends">Trends</td>
-                      <td className="attachments">Attachments</td>
-                      <td className="stats-chart">Stats</td>
+                      <td className="exchange">Exchanges</td>
+                      <td className="pairs">Pairs</td>
+                      <td className="status">Status</td>
+                      <td className="cir-supply">Circulating Supply</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td className="mv-icon">
-                        <img
-                          src="../assets/images/icon/market-value/icon1.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="coin-name">Dashcoin</td>
-                      <td className="buy">
-                        30%
-                    <img
-                          src="assets/images/icon/market-value/triangle-down.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="sell">
-                        20%
-                    <img
-                          src="assets/images/icon/market-value/triangle-up.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="trends">
-                        <img
-                          src="assets/images/icon/market-value/trends-up-icon.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="attachments">$ 56746,857</td>
-                      <td className="stats-chart">
-                        <canvas id="mvaluechart"></canvas>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="mv-icon">
-                        <div className="mv-icon">
-                          <img
-                            src="assets/images/icon/market-value/icon2.png"
-                            alt="icon"
-                          />
-                        </div>
-                      </td>
-                      <td className="coin-name">LiteCoin</td>
-                      <td className="buy">
-                        30%
-                    <img
-                          src="assets/images/icon/market-value/triangle-down.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="sell">
-                        20%
-                    <img
-                          src="assets/images/icon/market-value/triangle-up.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="trends">
-                        <img
-                          src="assets/images/icon/market-value/trends-down-icon.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="attachments">$ 56746,857</td>
-                      <td className="stats-chart">
-                        <canvas id="mvaluechart2"></canvas>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="mv-icon">
-                        <div className="mv-icon">
-                          <img
-                            src="assets/images/icon/market-value/icon3.png"
-                            alt="icon"
-                          />
-                        </div>
-                      </td>
-                      <td className="coin-name">Euthorium</td>
-                      <td className="buy">
-                        30%
-                    <img
-                          src="assets/images/icon/market-value/triangle-down.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="sell">
-                        20%
-                    <img
-                          src="assets/images/icon/market-value/triangle-up.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="trends">
-                        <img
-                          src="assets/images/icon/market-value/trends-up-icon.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="attachments">$ 56746,857</td>
-                      <td className="stats-chart">
-                        <canvas id="mvaluechart3"></canvas>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="mv-icon">
-                        <div className="mv-icon">
-                          <img
-                            src="assets/images/icon/market-value/icon4.png"
-                            alt="icon"
-                          />
-                        </div>
-                      </td>
-                      <td className="coin-name">Bitcoindash</td>
-                      <td className="buy">
-                        30%
-                    <img
-                          src="assets/images/icon/market-value/triangle-down.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="sell">
-                        20%
-                    <img
-                          src="assets/images/icon/market-value/triangle-up.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="trends">
-                        <img
-                          src="assets/images/icon/market-value/trends-up-icon.png"
-                          alt="icon"
-                        />
-                      </td>
-                      <td className="attachments">$ 56746,857</td>
-                      <td className="stats-chart">
-                        <canvas id="mvaluechart4"></canvas>
-                      </td>
-                    </tr>
+                  {price && price.length > 0 && price.slice(0, 10).map(p => <MarketValueList item={p} />)}
                   </tbody>
                 </table>
               </div>
@@ -436,15 +395,15 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
   const LivePriceList = ({ item }) => {
     return <li>
       {/* <div className="iconimg"> */}
-        <img
-            className="coin-img"
-            src={item ? item.logo_url : ''}
-            alt="avatar"
-            style={{ height: '20px', width: '20px' }}
-          />
-          {/* </div> */}
-      {item ? item.name : '-' }<span>
-        <i className={(item.price<5.0) ? 'fa fa-long-arrow-down' : 'fa fa-long-arrow-up'}></i>
+      <img
+        className="coin-img"
+        src={item ? item.logo_url : ''}
+        alt="avatar"
+        style={{ height: '20px', width: '20px' }}
+      />
+      {/* </div> */}
+      {item ? item.name : '-'}<span>
+        <i className={(item.price < 5.0) ? 'fa fa-long-arrow-down' : 'fa fa-long-arrow-up'}></i>
         $ {item ? parseFloat(item.price).toFixed(2) : '0'}</span>
     </li>
   }
@@ -642,31 +601,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     </div>
   }
 
-  const ExchangeArea = () => {
-    return <div className="col-xl-6 mt-md-30 mt-xs-30 mt-sm-30">
-      <div className="card">
-        <div className="card-body">
-          <h4 className="header-title">Exchange</h4>
-          <div className="exhcange-rate mt-5">
-            <form action="#">
-              <div className="input-form">
-                <input type="text" />
-                <span>BTC</span>
-              </div>
-              <div className="exchange-devider">To</div>
-              <div className="input-form">
-                <input type="text" />
-                <span>USD</span>
-              </div>
-              <div className="exchange-btn">
-                <button type="submit">Exchange Now</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  }
+
 
   const MainContent = () => {
     return <div className="main-content-inner ">
@@ -677,10 +612,10 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
       {/* <!-- sales report area end --> */}
 
       {/* <!-- overview area start --> */}
-      <div className="row">
+      {/* <div className="row">
         <OverviewArea />
         <CoinDistArea />
-      </div>
+      </div> */}
       {/* <!-- overview area end --> */}
 
       {/* <!-- market value area start --> */}

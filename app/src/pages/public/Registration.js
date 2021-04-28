@@ -42,6 +42,7 @@ const Registration = ({ setIsLoggedIn }) => {
         } else {
             const data = await response.json();
             localStorage.setItem('user', JSON.stringify({ token: data.token }));
+            localStorage.setItem('username', data.name );
             setIsLoggedIn(true);
         }
     }

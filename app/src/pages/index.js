@@ -34,9 +34,6 @@ const Index = () => {
                     <Route exact path="/">
                         {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
-                    <Route exact path="/login">
-                        <Login />
-                    </Route>
                     <Route exact path="/signup">
                     {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> :<Registration setIsLoggedIn={setIsLoggedIn} />}
                     </Route>

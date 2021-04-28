@@ -58,6 +58,7 @@ router.post('/', function(req, res, next) {
           (err,token) => {
             if(err) throw err;
             res.status(200).json({
+              name:result.name,
               token,
               msg:'User Created'
             });
