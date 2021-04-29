@@ -85,9 +85,9 @@ const Login = ({ setIsLoggedIn }) => {
 
                                         </div>
                                     </div>
-                                    <div className="col-6 text-right">
+                                    {/* <div className="col-6 text-right">
                                         <Link to="/forgotpassword">Forgot Password </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="submit-btn-area">
                                     <button id="form_submit" type="submit">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SidebarHeader, SidebarMenu, SearchBar, FullscreenBtn, UserProfile } from './Dashboard'
+import { SidebarHeader, SidebarMenu, FullscreenBtn, UserProfile } from './Dashboard'
 import { Link } from 'react-router-dom';
 
 
@@ -88,7 +88,7 @@ const Markets = () => {
                             {/* <!-- nav and search button --> */}
                             <div className="col-md-6 col-sm-8 clearfix">
                                 <NavbarBtn />
-                                <SearchBar />
+                                {/* <SearchBar /> */}
                             </div>
                             {/* <!-- profile info & task notification --> */}
                             <div className="col-md-6 col-sm-4 clearfix">
