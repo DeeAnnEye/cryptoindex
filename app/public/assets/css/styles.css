@@ -924,7 +924,7 @@ ul.breadcrumbs {
 /*-------------------- 2.6 Market value ------------------- */
 
 .market-status-table {
-    overflow: hidden;
+    overflow:hidden;
 }
 
 table.dbkit-table {
@@ -954,12 +954,13 @@ table.dbkit-table tr th,
 table.dbkit-table tr td {
     border-top: none!important;
 }
-
+/* 9677518199 */
 table.dbkit-table tr:hover {
     border-color: #e4e2f5;
 }
 
 table.dbkit-table tr td {
+    justify-content: center;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0;
@@ -1223,6 +1224,7 @@ table.dbkit-table tr td {
 .dbkit-table .heading-td td {
     color: #444;
     font-weight: 500;
+    /* align-items: center; */
 }
 
 .pagination_area ul li {

@@ -21,6 +21,7 @@ import Faqs from './private/Faqs';
 import About from './private/About';
 import Wallets from './private/Wallets';
 import Markets from './private/Markets';
+import Admin from './private/Admin';
 
 const Index = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -42,6 +43,9 @@ const Index = () => {
                     </Route>
                     <Route exact path="/dashboard">
                         {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
+                    </Route>
+                    <Route exact path="/admin">
+                        {user ? <Admin /> : <Login />}
                     </Route>
                     <Route exact path="/cookies">
                         {user ? <Cookies /> : <Login />}
