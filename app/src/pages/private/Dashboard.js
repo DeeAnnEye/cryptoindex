@@ -4,7 +4,7 @@ import SocketContext from '../../context';
 // import CoinSalesB from "./charts/CoinSales2.js"
 // import CoinSalesC from "./charts/CoinSales3.js"
 // import OverviewChart from "./charts/OverviewChart.js"
-import { Line } from 'react-chartjs-2';
+// import { Line } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 
 
@@ -265,6 +265,50 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     </div>
   }
 
+  // const CoinSales = ({item}) => {
+  //   // console.log(item);
+  //   // var coinData = item[0].price;
+  //   const data = {
+  //     labels:false,
+  //     datasets: [{
+  //         label: "Coin Price",
+  //         backgroundColor: "rgba(117, 19, 246, 0.1)",
+  //         borderColor: '#0b76b6',
+  //         fill: true,
+  //         data: item.price ,
+  //         lineTension: 0.5,
+  //     }]
+  // };
+  
+  // const options = {
+  //     plugins: {
+  //     legend: {
+  //         display: false
+  //     },
+  //     // animation: {
+  //     //     easing: "easeInOutBack"
+  //     // },
+  //     scales: {
+  //       yAxes: [{
+  //           display: false          
+  //       }],
+  //       xAxes: [{
+  //         type: 'time',
+  //         display: false,
+  //         autoSkip: false,
+  //         time: {
+  //             unit: 'second',
+  //             unitStepSize: 10
+  //         },
+  //       }]
+  //     }
+  //     }
+  // };
+
+  // return <Line data={data} options={options} />
+
+  // }
+
   const Card = ({ item }) => {
     // console.log('item',item);
     return <div className="col-md-4">
@@ -285,18 +329,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
             <span>{item && item['1d'] ? parseFloat(item['1d'].price_change_pct).toFixed(2) : '0'}</span>
           </div>
         </div>
-        {/* <Line data={
-           labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-        label: "Sales",
-        backgroundColor: "rgba(117, 19, 246, 0.1)",
-        borderColor: '#0b76b6',
-        fill: true,
-        data: [18, 41, 86, 49, 20, 35, 20, 50, 49, 30, 45, 25],
-        lineTension: 0.5,
-    }]
-        } options={options} /> */}
-        {/* <CoinSalesA /> */}
+        {/* <CoinSales data={item} /> */}
       </div>
     </div>
   }

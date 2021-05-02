@@ -1,5 +1,7 @@
 import React
-, { useState, useEffect }
+, { useState, 
+    // useEffect 
+}
     from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -8,7 +10,9 @@ import { Link } from 'react-router-dom';
 
 const Login = ({ setIsLoggedIn }) => {
     const [loginMsg, setLoginMsg] = useState('');
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, 
+        // watch, formState: { errors } 
+    } = useForm();
 
     const saveForm = async (data) => {
         try {

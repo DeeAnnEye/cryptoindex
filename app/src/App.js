@@ -11,6 +11,7 @@ function App() {
     const connectSocket = async () => {
       // localStorage.removeItem('user');
       try {
+        // eslint-disable-next-line
         const user = JSON.parse(localStorage.getItem('user'));
         // console.log(user);
         const socket = io(`${server}/crypto`, {

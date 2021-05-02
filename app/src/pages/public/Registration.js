@@ -12,7 +12,9 @@ import {
 const Registration = ({ setIsLoggedIn }) => {
 
     const [signMsg, setSignMsg] = useState('');
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, 
+        // watch, formState: { errors }
+     } = useForm();
 
     const saveForm = async (data) => {
 

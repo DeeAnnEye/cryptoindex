@@ -1,6 +1,9 @@
 import React, { useState , useEffect } from 'react';
-import { SidebarHeader, SidebarMenu, FullscreenBtn, UserProfile } from './Dashboard'
+import { SidebarHeader, SidebarMenu, 
+  // FullscreenBtn, 
+  UserProfile } from './Dashboard'
 import { Link } from 'react-router-dom';
+
 
 const Admin = () => {
 
@@ -37,12 +40,13 @@ const Admin = () => {
     }
 
     const UserTableData = ({item}) => {
+      
         return <tr>
           <td className="user-id">{item ? item._id : '-'}</td>
           <td className="user-name">{item ? item.name : '-'}</td>
           <td className="email">{item ? item.email : '-'}</td>
           <td className="role">{item ? item.role : '-'}</td>
-          <td className="remove-user"><button  className="btn btn-danger" type="button" >Remove User</button></td>
+          <td className="remove-user"><button className="btn btn-danger" type="button" >Remove User</button></td>
         </tr>
 
     }
