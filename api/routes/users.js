@@ -82,10 +82,10 @@ router.put('/:name', function(req, res, next) {
   });
 
   // DELETE:Delete a user
-router.delete('/:id', function(req, res, next) {  
+router.delete('/:email', function(req, res, next) {  
     const params = req.params;
-    var query = { _id: params.id };
-      
+    var query = { email: params.email };
+      // console.log(query);
       collection.deleteOne(query,((err, result) => {
         if(err) throw err;
         res.json({msg:'User Deleted'});
