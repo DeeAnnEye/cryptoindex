@@ -24,6 +24,7 @@ import About from './private/About';
 import Wallets from './private/Wallets';
 import Markets from './private/Markets';
 import Admin from './private/Admin';
+import Chat from './private/Chat';
 
 const Index = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -69,6 +70,9 @@ const Index = () => {
                     </Route>
                     <Route exact path="/buycoins">
                     {user ? <Markets/> :<Login />}                    
+                    </Route>
+                    <Route exact path="/chat">
+                    {user ? <Chat/> :<Login />}                    
                     </Route>
                 </Switch>
             </div>
