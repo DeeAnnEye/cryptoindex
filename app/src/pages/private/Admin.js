@@ -20,6 +20,8 @@ const Admin = () => {
   }, []);
 
   // console.log(UserData);
+  
+ 
 
   const [navclick, setNavclick] = useState(false);
   const NavbarBtn = () => {
@@ -41,10 +43,11 @@ const Admin = () => {
     </div>
   }
 
+
   const UserTableData = ({ item }) => {
 
-    const removeUser = async(userEmail) =>{
-      // console.log(userId);
+    const removeUser = async(userEmail) =>{         
+      
       try {
         const url = 'http://localhost:5000/users/' + userEmail;
         const response = await fetch(url, {
@@ -64,12 +67,8 @@ const Admin = () => {
             // setLoginMsg(err.msg);
             return;
         } else {
-            const response = await response.json();
+            // const data = await response.json();
             window.location.reload();
-            // console.log('User Delete',response);
-            // localStorage.setItem('user', JSON.stringify({ token: data.token }));
-            // localStorage.setItem('username', data.name );
-            // setIsLoggedIn(true);
         }
     } catch (err) {
         console.log(err)
@@ -104,7 +103,7 @@ const Admin = () => {
       </thead>
       <tbody>
         {/* <UserTableData /> */}
-        {UserData && UserData.length > 0 && UserData.slice(0, 8).map(p => <UserTableData item={p} />)}
+        {UserData && UserData.length > 0 && UserData.slice(0, 8).map((p,idx) => <UserTableData item={p} key={'user-' + idx} />)}
       </tbody>
     </table>
   }
@@ -136,7 +135,7 @@ const Admin = () => {
 
   return (
     <div>
-      <div className={`page-container ${navclick ? 'sbar_collapsed' : ''}`}>
+      <div className= 'page-container sbar_collapsed'>
         {/* <!-- sidebar menu area start --> */}
         <div className="sidebar-menu">
           <SidebarHeader />
@@ -148,7 +147,7 @@ const Admin = () => {
             <div className="row align-items-center">
               {/* <!-- nav and search button --> */}
               <div className="col-md-6 col-sm-8 clearfix">
-                <NavbarBtn />
+                {/* <NavbarBtn /> */}
                 {/* <SearchBar /> */}
               </div>
               {/* <!-- profile info & task notification --> */}
