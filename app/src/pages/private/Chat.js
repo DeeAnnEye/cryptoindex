@@ -4,7 +4,7 @@ const Chat = () => {
     return (
         <div className="chat-container">
       <header className="chat-header">
-        <h1><i className="fas fa-smile"></i> ChatCord</h1>
+        <h1><i className="fas fa-smile"></i> CryptoChat</h1>
         <a id="leave-btn" className="btn">Leave Room</a>
       </header>
       <main className="chat-main">

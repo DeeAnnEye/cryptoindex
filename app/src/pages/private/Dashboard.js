@@ -4,7 +4,7 @@ import SocketContext from '../../context';
 // import CoinSalesB from "./charts/CoinSales2.js"
 // import CoinSalesC from "./charts/CoinSales3.js"
 // import OverviewChart from "./charts/OverviewChart.js"
-// import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Link } from 'react-router-dom';
 
 
@@ -311,6 +311,42 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
 
   const Card = ({ item }) => {
     // console.log('item',item);
+    const data = {
+      labels: ["1D", "7D", "30D"],
+      datasets: [{
+          label: "Price Change %",
+          backgroundColor: "rgba(117, 19, 246, 0.1)",
+          borderColor: '#0b76b6',
+          fill: true,
+          data: [parseFloat(item['1d'].price_change_pct).toFixed(2),parseFloat(item['7d'].price_change_pct).toFixed(2),parseFloat(item['30d'].price_change_pct).toFixed(2)],
+          lineTension: 0.5,
+      }]
+  };
+
+  const options = {
+    plugins: {
+          legend: {
+              display: false
+          },
+          animation: {
+              easing: "easeInOutBack"
+          },
+          scales: {
+            display: false,
+            xAxes:{
+              display: false
+            },
+            yAxes:{
+              display: false
+            }
+
+          },
+          gridLines:{
+            display:false
+          }
+        }
+  }
+  
     return <div className="col-md-4">
       <div className="single-report mb-xs-30">
         <div className="s-report-inner pr--20 pt--30 mb-3">
@@ -330,6 +366,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
           </div>
         </div>
         {/* <CoinSales data={item} /> */}
+        <Line data={data} options={options}/>
       </div>
     </div>
   }
