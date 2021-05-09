@@ -494,7 +494,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
           <h4 className="header-title">Live Crypto Price</h4>
           <div className="cripto-live mt-5">
             <ul>
-              {price && price.length > 0 && price.slice(0, 8).map(p => <LivePriceList item={p} />)}
+              {price && price.length > 0 && price.slice(0, 10).map(p => <LivePriceList item={p} />)}
             </ul>
           </div>
         </div>
