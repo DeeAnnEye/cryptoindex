@@ -312,13 +312,13 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
   const Card = ({ item }) => {
     // console.log('item',item);
     const data = {
-      labels: ["1D", "7D", "30D"],
+      labels: ["1D", "7D", "30D", "365D"],
       datasets: [{
-          label: "Price Change %",
+          label: "Price Change",
           backgroundColor: "rgba(117, 19, 246, 0.1)",
           borderColor: '#0b76b6',
           fill: true,
-          data: [parseFloat(item['1d'].price_change_pct).toFixed(2),parseFloat(item['7d'].price_change_pct).toFixed(2),parseFloat(item['30d'].price_change_pct).toFixed(2)],
+          data: [parseFloat(item['1d'].price_change).toFixed(2),parseFloat(item['7d'].price_change).toFixed(2),parseFloat(item['30d'].price_change).toFixed(2), parseFloat(item['365d'].price_change).toFixed(2)],
           lineTension: 0.5,
       }]
   };
