@@ -60,6 +60,15 @@ const SidebarMenu = () => {
       }]
   },
   {
+    name: 'Chat with other users',
+    icon: 'ti-comments-smiley',
+    submenu: [
+      {
+        name: 'CryptoChat',
+        path: '/chat'
+      }]
+  },
+  {
     name: 'Terms of Use',
     icon: 'ti-receipt',
     submenu: [{

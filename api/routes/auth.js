@@ -42,6 +42,7 @@ client.connect(err => {
             }
             return res.status(200).json({
               name:result.name,
+              role:result.role,
               token,
               msg: 'Login Successful.'
             });
