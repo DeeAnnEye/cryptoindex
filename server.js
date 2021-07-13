@@ -60,10 +60,10 @@ app.use('/auth', authRouter);
 
 // static assets for production
 if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('../app/build'))
+    app.use(express.static('/app/build'))
 
     app.get('*', (req,res) => {
-        res.sendFile('../app/build/index.html')
+        res.sendFile('/app/build/index.html')
     })
 }
 
