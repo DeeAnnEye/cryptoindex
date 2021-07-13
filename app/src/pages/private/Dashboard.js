@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const SidebarHeader = () => {
   return <div className="sidebar-header">
     <div className="logo">
-      <a href="#">
+      <a>
         <h3 style={{ color: "white", fontWeight: 600 }}>CRYPTOINDEX</h3>
       </a>
     </div>
@@ -59,15 +59,15 @@ const SidebarMenu = () => {
         path: '/about'
       }]
   },
-  {
-    name: 'Chat with other users',
-    icon: 'ti-comments-smiley',
-    submenu: [
-      {
-        name: 'CryptoChat',
-        path: '/chat'
-      }]
-  },
+  // {
+  //   name: 'Chat with other users',
+  //   icon: 'ti-comments-smiley',
+  //   submenu: [
+  //     {
+  //       name: 'CryptoChat',
+  //       path: '/chat'
+  //     }]
+  // },
   {
     name: 'Terms of Use',
     icon: 'ti-receipt',
@@ -105,26 +105,29 @@ const SidebarMenu = () => {
   </div>
 }
 
-const SearchBar = () => {
-  return <div className="search-box pull-left">
-    <form action="#">
-      <input
-        type="text"
-        name="search"
-        placeholder="Search..."
-        required
-      />
-      <i className="ti-search"></i>
-    </form>
-  </div>
-}
+// const SearchBar = () => {
+//   return <div className="search-box pull-left">
+//     <form action="#">
+//       <input
+//         type="text"
+//         name="search"
+//         placeholder="Search..."
+//         required
+//       />
+//       <i className="ti-search"></i>
+//     </form>
+//   </div>
+// }
 
 const FullscreenBtn = () => {
-  const [full, setFull] = useState(true);
-  return <li onClick={() => {
-    setFull(!full)
-  }} id={`${full ? `full-view` : `full-view-exit`}`}><i className={`${full ? `ti-fullscreen` : `ti-zoom-out`}`}></i></li>
-  // <li id="full-view-exit"><i className="ti-zoom-out"></i></li>
+  // const [full, setFull] = useState(true);
+  // return <li onClick={() => {
+  //   setFull(!full)
+  // }} id={`${full ? `full-view` : `full-view-exit`}`}><i className={`${full ? `ti-fullscreen` : `ti-zoom-out`}`}></i></li>
+  // // // <li id="full-view-exit"><i className="ti-zoom-out"></i></li>
+  // {item.role == 'admin' ?   <Link to="/admin">Go To Admin Panel</Link>
+  // : ""}
+  return <Link to="/admin">Go To Admin Panel</Link>
 }
 
 const PageTitle = () => {
@@ -385,37 +388,37 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     </div>
   }
 
-  const OverviewArea = () => {
-    return <div className="col-xl-9 col-lg-8">
-      <div className="card">
-        <div className="card-body">
-          <div
-            className="d-flex justify-content-between align-items-center"
-          >
-            <h4 className="header-title mb-0">Overview</h4>
-            {/* <select className="custome-select border-0 pr-3">
-              <option>This Week</option>
-              <option value="0">Last Week</option>
-            </select> */}
-          </div>
-          {/* <div id="verview-shart"> */}
-          {/* <OverviewChart /> */}
-          {/* </div> */}
-        </div>
-      </div>
-    </div>
-  }
+  // const OverviewArea = () => {
+  //   return <div className="col-xl-9 col-lg-8">
+  //     <div className="card">
+  //       <div className="card-body">
+  //         <div
+  //           className="d-flex justify-content-between align-items-center"
+  //         >
+  //           <h4 className="header-title mb-0">Overview</h4>
+  //           {/* <select className="custome-select border-0 pr-3">
+  //             <option>This Week</option>
+  //             <option value="0">Last Week</option>
+  //           </select> */}
+  //         </div>
+  //         {/* <div id="verview-shart"> */}
+  //         {/* <OverviewChart /> */}
+  //         {/* </div> */}
+  //       </div>
+  //     </div>
+  //   </div>
+  // }
 
-  const CoinDistArea = () => {
-    return <div className="col-xl-3 col-lg-4 coin-distribution">
-      <div className="card h-full">
-        <div className="card-body">
-          <h4 className="header-title mb-0">Coin Distribution</h4>
-          <div id="coin_distribution"></div>
-        </div>
-      </div>
-    </div>
-  }
+  // const CoinDistArea = () => {
+  //   return <div className="col-xl-3 col-lg-4 coin-distribution">
+  //     <div className="card h-full">
+  //       <div className="card-body">
+  //         <h4 className="header-title mb-0">Coin Distribution</h4>
+  //         <div id="coin_distribution"></div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // }
 
   const MarketValueList = ({ item }) => {
     return <tr>

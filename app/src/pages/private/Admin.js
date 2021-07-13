@@ -23,14 +23,14 @@ const Admin = () => {
   
  
 
-  const [navclick, setNavclick] = useState(false);
-  const NavbarBtn = () => {
-    return <div className="nav-btn pull-left" onClick={() => { setNavclick(!navclick) }}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  }
+  // const [navclick, setNavclick] = useState(false);
+  // const NavbarBtn = () => {
+  //   return <div className="nav-btn pull-left" onClick={() => { setNavclick(!navclick) }}>
+  //     <span></span>
+  //     <span></span>
+  //     <span></span>
+  //   </div>
+  // }
   const PageTitle = () => {
     return <div className="col-sm-6">
       <div className="breadcrumbs-area clearfix">

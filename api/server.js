@@ -58,6 +58,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 
+// static assets for production
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('../app/build'))
+
+    app.get('*', (req,res) => {
+        res.sendFile('../app/build/index.html')
+    })
+}
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => { console.log(`Server started running on port ${PORT}`) })
 
