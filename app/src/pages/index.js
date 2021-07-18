@@ -48,28 +48,28 @@ const Index = () => {
                         {user ? <Dashboard user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/admin">
-                        {user ? <Admin /> : <Login />}
+                        {user ? <Admin user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/cookies">
-                        {user ? <Cookies /> : <Login />}
+                        {user ? <Cookies user={user}  setIsLoggedIn={setIsLoggedIn} /> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/about">
-                        {user ? <About/> : <Login />}
+                        {user ? <About user={user}  setIsLoggedIn={setIsLoggedIn}/> : <Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/security">
-                    {user ?<Security />:<Login />}
+                    {user ?<Security user={user}  setIsLoggedIn={setIsLoggedIn} />:<Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/contacts">
-                    {user ?<ContactUs />:<Login />}
+                    {user ?<ContactUs user={user}  setIsLoggedIn={setIsLoggedIn} />:<Login setIsLoggedIn={setIsLoggedIn} />}
                     </Route>
                     <Route exact path="/faqs">
-                    {user ? <Faqs/> :<Login />}                    
+                    {user ? <Faqs user={user}  setIsLoggedIn={setIsLoggedIn}/> :<Login setIsLoggedIn={setIsLoggedIn}/>}                    
                     </Route>
                     <Route exact path="/wallets">
-                    {user ? <Wallets/> :<Login />}                    
+                    {user ? <Wallets user={user}  setIsLoggedIn={setIsLoggedIn}/> :<Login setIsLoggedIn={setIsLoggedIn} />}                    
                     </Route>
                     <Route exact path="/buycoins">
-                    {user ? <Markets/> :<Login />}                    
+                    {user ? <Markets user={user}  setIsLoggedIn={setIsLoggedIn}/> :<Login setIsLoggedIn={setIsLoggedIn} />}                    
                     </Route>
                     {/* <Route exact path="/chat">
                     {user ? <Chat/> :<Login />}                    

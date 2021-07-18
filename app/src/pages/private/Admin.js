@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import {
-  SidebarHeader, SidebarMenu,
+  SidebarHeader, SidebarMenu
   // FullscreenBtn, 
-  UserProfile
 } from './Dashboard'
 import { Link } from 'react-router-dom';
 
 
-const Admin = () => {
+const Admin = ({ user, setIsLoggedIn }) => {
 
   const [UserData, setUserData] = useState([]);
 
   useEffect(() => {
 
-    fetch('http://localhost:5000/users/')
+    fetch('http://167.172.237.237:5001/users')
       .then(response => response.json())
       .then(data => setUserData(data));
 
@@ -49,7 +48,7 @@ const Admin = () => {
     const removeUser = async(userEmail) =>{         
       
       try {
-        const url = 'http://localhost:5000/users/' + userEmail;
+        const url = 'http://167.172.237.237:5001/users/' + userEmail;
         const response = await fetch(url, {
             method: 'DELETE',
             headers: {
@@ -106,6 +105,37 @@ const Admin = () => {
         {UserData && UserData.length > 0 && UserData.slice(0, 8).map((p,idx) => <UserTableData item={p} key={'user-' + idx} />)}
       </tbody>
     </table>
+  }
+  const UserProfile = ({ user, setIsLoggedIn }) => {
+    const [show, setShow] = useState(false);
+  
+    const logout = async () => {
+  
+      localStorage.removeItem('user');
+      setIsLoggedIn(false);
+      window.location.reload();
+    }
+  
+    var username = localStorage.getItem('username');
+    // console.log(username)
+  
+    return <div className={`user-profile pull-right ${show ? 'show' : ''}`}>
+      <img
+        className="avatar user-thumb"
+        src="../assets/images/author/avatar.png"
+        alt="avatar"
+      />
+      <h4 className="user-name dropdown-toggle" data-toggle="dropdown" aria-expanded={show ? "true" : "false"} onClick={() => { setShow(!show) }}>
+        {`${username}`} <i className="fa fa-angle-down"></i>
+      </h4>
+      <div className={`dropdown-menu ${show ? 'show' : ''}`}>
+        {/* <a className="dropdown-item" href="#">Message</a> */}
+        {/* <a className="dropdown-item" href="#">Settings</a> */}
+        <a onClick={() => {
+          logout();
+        }} className="dropdown-item" href="#">Log Out</a>
+      </div>
+    </div>
   }
 
   const AdminContent = () => {
@@ -166,7 +196,7 @@ const Admin = () => {
             <div className="row align-items-center">
               <PageTitle />
               <div className="col-sm-6 clearfix">
-                <UserProfile />
+                <UserProfile user={user} setIsLoggedIn={setIsLoggedIn} />
               </div>
             </div>
           </div>

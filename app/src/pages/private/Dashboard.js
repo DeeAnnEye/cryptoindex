@@ -127,7 +127,13 @@ const FullscreenBtn = () => {
   // // // <li id="full-view-exit"><i className="ti-zoom-out"></i></li>
   // {item.role == 'admin' ?   <Link to="/admin">Go To Admin Panel</Link>
   // : ""}
+  var role = localStorage.getItem('role');
+  if(role === 'admin'){
   return <Link to="/admin">Go To Admin Panel</Link>
+  }
+  else{
+    return false
+  }
 }
 
 const PageTitle = () => {
@@ -184,14 +190,17 @@ const ExchangeArea = (props) => {
 
   const coinConvert = async (coinType, coinCur) => {
     //  console.log(coinType);
-    const response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=df4f2c2bf8926feecee70b01bf6ec9f9&ids=${coinType}&convert=${coinCur}`)
-    const data = await response.json();
+    // const response = await fetch(`https://api.nomics.com/v1/currencies/ticker?key=df4f2c2bf8926feecee70b01bf6ec9f9&ids=${coinType}&convert=${coinCur}`)
+    // const data = await response.json();
     // let price = JSON.stringify(data);
     const qty = qtyRef.current.value;
-    const rate = data[0].price;
+    const rate = localStorage.getItem('btc');
     resultRef.current.value = (qty * rate).toFixed(2);
 
   }
+  // var btc = item[0].price;
+  // var btc_rate = parseFloat(btc).toFixed(2);
+  // localStorage.setItem('btc',btc_rate)
 
   return <div className="col-xl-6 mt-md-30 mt-xs-30 mt-sm-30">
     <div className="card">
@@ -267,6 +276,15 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
     };
   }, [socket]);
 
+  // var btc = price[0].price;
+  // var btc_rate = parseFloat(btc).toFixed(2);
+  // localStorage.setItem('btc',btc_rate)
+  price && price.length > 0 && price.slice(0,1).map(p => {
+    var btc_rate = p.price;
+    // var btc_rate = parseFloat(btc).toFixed(2);
+    localStorage.setItem('btc',btc_rate)
+    console.log(btc_rate);
+  } )
 
   const [navclick, setNavclick] = useState(false);
   const NavbarBtn = () => {
@@ -323,6 +341,7 @@ const Dashboard = ({ user, setIsLoggedIn }) => {
 
   const Card = ({ item }) => {
     // console.log('item',item);
+   
     const data = {
       labels: ["1D", "7D", "30D", "365D"],
       datasets: [{

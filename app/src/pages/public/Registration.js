@@ -21,10 +21,11 @@ const Registration = ({ setIsLoggedIn }) => {
         if(data.password !== data.confirmpassword){
            return setSignMsg("Passwords did not match");
         }else{
+            localStorage.setItem('username', data.name );
             delete data.confirmpassword;
         }
         // console.log(data)
-        const url = 'http://localhost:5000/users/';
+        const url = 'http://167.172.237.237:5001/users/';
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -44,7 +45,7 @@ const Registration = ({ setIsLoggedIn }) => {
         } else {
             const data = await response.json();
             localStorage.setItem('user', JSON.stringify({ token: data.token }));
-            localStorage.setItem('username', data.name );
+            localStorage.setItem('role', 'user' );
             setIsLoggedIn(true);
         }
     }

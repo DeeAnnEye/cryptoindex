@@ -30,7 +30,7 @@ const getPrice = async () => {
 
 const sendPrice = () => {
     cron.schedule('*/10 * * * * *', async () => {
-        console.log('running a task every 10 seconds');
+        // console.log('running a task every 10 seconds');
         crypto.emit('price', { data: await getPrice() })
     });
 }
@@ -83,7 +83,7 @@ if(process.env.NODE_ENV === 'production'){
 //  })
 
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 server.listen(PORT, () => { console.log(`Server started running on port ${PORT}`) })
 
 module.exports = app;

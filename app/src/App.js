@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SocketContext from './context';
 import io from 'socket.io-client';
 import Index from './pages/index';
-const server = 'http://localhost:5000';
+const server = 'http://167.172.237.237:5001';
 
 function App() {
   const [sck, setSck] = useState(null);

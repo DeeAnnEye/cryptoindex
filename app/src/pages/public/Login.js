@@ -16,7 +16,7 @@ const Login = ({ setIsLoggedIn }) => {
 
     const saveForm = async (data) => {
         try {
-            const url = 'http://localhost:5000/auth/';
+            const url = 'http://167.172.237.237:5001/auth/';
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -37,6 +37,7 @@ const Login = ({ setIsLoggedIn }) => {
                 const data = await response.json();
                 localStorage.setItem('user', JSON.stringify({ token: data.token }));
                 localStorage.setItem('username', data.name );
+                localStorage.setItem('role', data.role );
                 setIsLoggedIn(true);
             }
         } catch (err) {
